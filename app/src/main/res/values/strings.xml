@@ -5,4 +5,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="new_list_product_cell_initial_qty">0</string>
     <string name="new_list_product_cell_default_item_name" >Product Name</string>
+    <string name="new_list_default_date_text">--/--/--</string>
+    <string name="new_list_calendar_select_btn_text">Select</string>
+    <string name="new_list_calendar_cancel_btn_text">Cancel</string>
 </resources>
