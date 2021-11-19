@@ -1,6 +1,8 @@
 package com.cerverae18.superlistfinal
 
 
+import android.annotation.SuppressLint
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,10 +11,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.cerverae18.superlistfinal.databinding.ActivityNewListBinding
 import android.view.Gravity
+import android.view.KeyEvent
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
+import kotlin.collections.HashMap
 
 
 class NewListActivity : AppCompatActivity() {
@@ -20,33 +26,90 @@ class NewListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNewListBinding
     private  var listDate: Long? = null
 
+    private lateinit var listNameEditText: EditText
+    private var dateWasSelected = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityNewListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        this.supportActionBar?.hide()
+
+        listNameEditText = binding.listNameEditText
 
         val products  = listOf<Product>(Product("Pizza", Category("FOOD")), Product("Eggs", Category("FOOD")), Product("Cooking Oil", Category("Cooking")))
+        val productsAddedToList : HashMap<Product, Int> = hashMapOf()
 
-        for (i in 1..20){
-            val frag = NewListProductCellFragment.newInstance(products.first())
-
+        //ADD ALL PRODUCTS
+        // TODO()  GET DATA FROM DATABASE FOR PRODUCTS
+        products.forEach { product ->
+            val frag = NewListProductCellFragment.newInstance(product, productsAddedToList)
             supportFragmentManager.beginTransaction().add(R.id.newListProductsFrags,frag ).commit()
-
         }
 
 
         binding.btnSelectDate.setOnClickListener {
-           listDate = Calendar.getInstance().timeInMillis
+            removeFocusEditText(listNameEditText)
+            listNameEditText.isEnabled = false
+            listDate = Calendar.getInstance().timeInMillis
             showCalendarPopUpView(it)
         }
+
+        binding.btnSaveList.setOnClickListener {
+            var missingFields = 0
+            val noName = listNameEditText.text.toString() == ""
+            val noProducts = productsAddedToList.isEmpty()
+            val noDate = !dateWasSelected
+
+            Log.i("EACS", productsAddedToList.toString())
+            if(noDate || noName || noProducts){
+              createAlertDialog(R.string.missing_information, R.string.missing_information_message)
+              return@setOnClickListener
+            }
+
+
+           //TODO() ADD LIST TO DATABASE AND SEND TO MAIN MENU
+
+        }
+
+        listNameEditText.setOnKeyListener { view, keyCode, _ ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER){
+                removeFocusEditText(view as EditText)
+                 return@setOnKeyListener true
+            }
+             false
+        }
+
 
 
     }
 
+    private fun createAlertDialog(title: Int, message: Int){
+        val dialog = AlertDialog.Builder(this)
+            .setTitle(getString(title))
+            .setMessage(getString(message))
+            .setNegativeButton(R.string.cancel) { view, _ ->
+                //Toast.makeText(this, "Cancel button pressed", Toast.LENGTH_SHORT).show()
+                view.dismiss()
+            }
+            .setCancelable(false)
+            .create()
+
+        dialog.show()
+    }
+
+
+    private fun removeFocusEditText(editText : EditText){
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(editText.windowToken, 0)
+        editText.isFocusable = false
+        editText.isFocusableInTouchMode = true
+    }
+
+
     private fun showCalendarPopUpView(view: View){
         val inflater = layoutInflater
         val  popupView = inflater.inflate(R.layout.new_list_select_date_popup, null)
-        // create the popup window
         // create the popup window
         val width = LinearLayout.LayoutParams.WRAP_CONTENT
         val height = LinearLayout.LayoutParams.WRAP_CONTENT
@@ -76,23 +139,19 @@ class NewListActivity : AppCompatActivity() {
 
         btnSelect.setOnClickListener {
              binding.selectedDateText.text = sdf.format(tempDate)
-                listDate = calendar.date
-            popupWindow.dismiss()
+             listDate = calendar.date
+            dateWasSelected = true
+             popupWindow.dismiss()
+             listNameEditText.isEnabled = true
         }
 
         btnCancel.setOnClickListener {
-            Log.i("TEST", "$listDate")
-            popupWindow.dismiss() }
+            popupWindow.dismiss()
+            listNameEditText.isEnabled = true
+        }
 
-        // show the popup window
-        // which view you pass in doesn't matter, it is only used for the window tolken
-
-        // show the popup window
-        // which view you pass in doesn't matter, it is only used for the window tolken
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0)
-//        popupView.setOnClickListener{
-//           // popupWindow.dismiss()
-//        }
+
 
     }
 
