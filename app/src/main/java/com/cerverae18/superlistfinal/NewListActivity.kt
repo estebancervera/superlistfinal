@@ -42,9 +42,12 @@ class NewListActivity : AppCompatActivity() {
 
         //ADD ALL PRODUCTS
         // TODO()  GET DATA FROM DATABASE FOR PRODUCTS
-        products.forEach { product ->
-            val frag = NewListProductCellFragment.newInstance(product, productsAddedToList)
-            supportFragmentManager.beginTransaction().add(R.id.newListProductsFrags,frag ).commit()
+        if(savedInstanceState == null) {
+            products.forEach { product ->
+                val frag = NewListProductCellFragment.newInstance(product, productsAddedToList)
+                supportFragmentManager.beginTransaction().add(R.id.newListProductsFrags, frag)
+                    .commit()
+            }
         }
 
 
