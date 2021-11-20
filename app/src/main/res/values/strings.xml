@@ -13,4 +13,7 @@
     <string name="list_name">List Name</string>
     <string name="date"> Date</string>
     <string name="products">Products</string>
+    <string name="list_date">List Date</string>
+    <string name="master_list">Master List</string>
+    <string name="back">Back</string>
 </resources>

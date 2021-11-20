@@ -1,11 +1,16 @@
 package com.cerverae18.superlistfinal
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import com.cerverae18.superlistfinal.databinding.FragmentMainActivityListCellBinding
 import com.cerverae18.superlistfinal.databinding.FragmentNewListProductCellBinding
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.random.Random
+import kotlin.random.Random.Default.nextInt
 
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,7 +27,7 @@ class MainActivityListCellFragment : Fragment() {
 
     private var list: List? = null
 
-    private var _binding: FragmentNewListProductCellBinding? = null
+    private var _binding: FragmentMainActivityListCellBinding? = null
     private val binding get() = _binding!!
 
 
@@ -39,10 +44,27 @@ class MainActivityListCellFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = FragmentNewListProductCellBinding.inflate(inflater, container, false)
+        _binding = FragmentMainActivityListCellBinding.inflate(inflater, container, false)
 
+        val color = Color.rgb(Random.nextInt(120, 255), Random.nextInt(120, 255), Random.nextInt(120, 255))
+        binding.mainActivityListCellCardview.setCardBackgroundColor(color)
+        val sdf = SimpleDateFormat("dd/MM/yyyy")
+
+        val listNameText = binding.mainActivityListCellName
+        val listDateText = binding.mainActivityListCellDate
+        //listNameText.setTextColor(Color.WHITE)
+        listNameText.text = list?.name
+        listDateText.text = sdf.format(list?.date)
+        //listDateText.setTextColor(Color.WHITE)
 
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+
+        
+
+       return super.onCreateOptionsMenu(menu, inflater)
     }
 
     companion object {
