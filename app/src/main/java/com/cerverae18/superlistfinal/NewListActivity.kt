@@ -7,11 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.util.TimeUtils
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.cerverae18.superlistfinal.databinding.ActivityNewListBinding
-import android.view.Gravity
-import android.view.KeyEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
@@ -29,11 +26,14 @@ class NewListActivity : AppCompatActivity() {
     private lateinit var listNameEditText: EditText
     private var dateWasSelected = false
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityNewListBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        this.supportActionBar?.hide()
+        this.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        this.supportActionBar?.setDisplayShowTitleEnabled(false)
 
         listNameEditText = binding.listNameEditText
 
@@ -72,7 +72,7 @@ class NewListActivity : AppCompatActivity() {
 
 
            //TODO() ADD LIST TO DATABASE AND SEND TO MAIN MENU
-
+            finish()
         }
 
         listNameEditText.setOnKeyListener { view, keyCode, _ ->
@@ -85,6 +85,11 @@ class NewListActivity : AppCompatActivity() {
 
 
 
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 
     private fun createAlertDialog(title: Int, message: Int){
