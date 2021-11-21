@@ -10,7 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Superlistfinal">
         <activity
+<<<<<<< HEAD
             android:name=".NewListActivity"
+=======
+            android:name=".MasterListActivity"
+>>>>>>> origin/masterlistactivity
             android:exported="true" />
         <activity
             android:name=".MainActivity"

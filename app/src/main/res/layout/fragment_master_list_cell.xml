@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="12dp"
+    android:layout_marginTop="9dp"
+    android:layout_marginRight="12dp"
+    android:layout_marginBottom="9dp"
+    app:cardBackgroundColor="@android:color/secondary_text_light_nodisable"
+    app:cardCornerRadius="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp">
+
+        <com.cerverae18.superlistfinal.SquareButton
+
+            android:id="@+id/btn_delete"
+            android:layout_width="40dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/btn_decrease_view"
+                android:layout_width="37dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="@drawable/ic_delete"
+                android:scaleType="centerInside"
+                app:layout_constraintDimensionRatio="W,1:1" />
+
+        </com.cerverae18.superlistfinal.SquareButton>
+
+        <TextView
+            android:id="@+id/master_list_product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="16dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/new_list_product_cell_default_item_name"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/master_list_product_name2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/separator"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/master_list_product_category"
+            app:layout_constraintStart_toEndOf="@+id/master_list_product_name"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/master_list_product_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/product_category"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_delete"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
