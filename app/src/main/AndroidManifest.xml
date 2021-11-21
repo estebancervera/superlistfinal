@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Superlistfinal">
         <activity
+            android:name=".MasterListActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
