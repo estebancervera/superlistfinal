@@ -11,12 +11,6 @@ import android.text.Editable
 import android.text.Layout
 import android.widget.LinearLayout
 
-
-
-
-
-
-
 class MasterListActivity : AppCompatActivity() {
 
     //AlertDialog used to add a new product to the master list
@@ -35,6 +29,9 @@ class MasterListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMasterListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        this.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        this.supportActionBar?.setDisplayShowTitleEnabled(false)
 
         dialogBuilder = AlertDialog.Builder(this)
 
@@ -89,5 +86,10 @@ class MasterListActivity : AppCompatActivity() {
              dialogBuilder.show()
         }
 
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 }
