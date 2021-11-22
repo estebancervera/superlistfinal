@@ -3,6 +3,7 @@ package com.cerverae18.superlistfinal
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.cerverae18.superlistfinal.databinding.ActivityMainBinding
@@ -35,10 +36,17 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
+
+
+
         for(i in 1..20){
             val frag = MainActivityListCellFragment.newInstance(lists.first())
             supportFragmentManager.beginTransaction().add(R.id.main_activity_lists_frags, frag).commit()
         }
+
+
+
+        Log.i("EACS", "${supportFragmentManager.fragments.size}")
 
 //        lists.forEach { list ->
 //            val frag = MainActivityListCellFragment.newInstance(list)
@@ -64,7 +72,9 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.master_list -> {
-                //TODO SEND TO MASTER LIST ACTIVITY
+                Intent(this, MasterListActivity::class.java).also {
+                    startActivity(it)
+                }
             }
 
         }
