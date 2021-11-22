@@ -1,4 +1,4 @@
-package com.cerverae18.superlistfinal
+package com.cerverae18.superlistfinal.fragments
 
 import android.content.DialogInterface
 import android.graphics.Color
