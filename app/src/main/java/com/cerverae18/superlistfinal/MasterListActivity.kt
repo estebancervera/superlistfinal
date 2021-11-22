@@ -7,9 +7,10 @@ import androidx.appcompat.app.AlertDialog
 import com.cerverae18.superlistfinal.databinding.ActivityMasterListBinding
 import android.content.DialogInterface
 
-import android.text.Editable
-import android.text.Layout
 import android.widget.LinearLayout
+import com.cerverae18.superlistfinal.fragments.MasterListCellFragment
+import com.cerverae18.superlistfinal.logic.entities.Category
+import com.cerverae18.superlistfinal.logic.entities.Product
 
 class MasterListActivity : AppCompatActivity() {
 
@@ -70,7 +71,7 @@ class MasterListActivity : AppCompatActivity() {
                 //OR
                 val productName: String = nameEditText.text.toString()
                 val productCategory: String = categoryEditText.text.toString()
-                val newProduct: Product = Product(productName, Category(productCategory))
+                val newProduct: Product = Product( productName, Category(productCategory))
 
                 var frag = MasterListCellFragment.newInstance(newProduct.name, newProduct.category.name)
                 supportFragmentManager.beginTransaction()

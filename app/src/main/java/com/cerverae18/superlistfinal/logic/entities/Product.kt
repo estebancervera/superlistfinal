@@ -1,4 +1,4 @@
-package com.cerverae18.superlistfinal
+package com.cerverae18.superlistfinal.logic.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -7,9 +7,12 @@ import java.io.Serializable
 
 
 @Entity
-data class Product(
-    @PrimaryKey(autoGenerate = true) val id : Int = 0,
+ data class Product(
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "category") val category: Category
-    ): Serializable
+    ): Serializable {
+        @PrimaryKey(autoGenerate = true) val productId : Int = 0
+    }
+
+
 
