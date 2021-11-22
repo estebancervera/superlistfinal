@@ -54,7 +54,8 @@ class MasterListCellFragment : Fragment() {
         dialogBuilder.setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, whichButton ->
             //activity?.supportFragmentManager?.popBackStack(requireActivity())
             //activity?.fragmentManager?.beginTransaction()?.remove(requireActivity() as Fragment!)?.commit()
-            activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
+          //  activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
+            parentFragmentManager.beginTransaction().remove(this).commit()
             dialog.dismiss()
         })
 
