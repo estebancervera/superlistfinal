@@ -1,16 +1,13 @@
-package com.cerverae18.superlistfinal
+package com.cerverae18.superlistfinal.fragments
 
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import com.cerverae18.superlistfinal.databinding.FragmentMainActivityListCellBinding
-import com.cerverae18.superlistfinal.databinding.FragmentNewListProductCellBinding
+import com.cerverae18.superlistfinal.logic.entities.List
 import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.random.Random
-import kotlin.random.Random.Default.nextInt
 
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
