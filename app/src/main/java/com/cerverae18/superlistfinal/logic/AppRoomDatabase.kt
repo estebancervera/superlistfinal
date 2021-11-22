@@ -4,13 +4,19 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
+import com.cerverae18.superlistfinal.logic.entities.Category
+import com.cerverae18.superlistfinal.logic.entities.List
 import com.cerverae18.superlistfinal.logic.entities.Product
+import com.cerverae18.superlistfinal.logic.entities.ProductListCrossRef
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
-@Database(entities = arrayOf(Product::class,), version = 1)
+@Database(entities = [Product::class, List::class, ProductListCrossRef::class, Category::class], version = 2)
 abstract class AppRoomDatabase : RoomDatabase() {
 
     abstract fun productDao(): ProductDao
+    abstract fun categoryDao(): CategoryDao
 
     // Singleton
     companion object {
@@ -21,8 +27,8 @@ abstract class AppRoomDatabase : RoomDatabase() {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    AppRoomDatabase::class.java, "app_database")
-                   // .addCallback(MusicDatabaseCallback(scope))
+                    AppRoomDatabase::class.java, "app_database").fallbackToDestructiveMigration()
+                    .addCallback(AppDatabaseCallback(scope))
                     .build()
                 INSTANCE = instance
                 // return instance
@@ -30,5 +36,26 @@ abstract class AppRoomDatabase : RoomDatabase() {
             }
         }
         // ADD Callback in case we need to populate database on creation
+
+        private class AppDatabaseCallback(private val scope: CoroutineScope) : RoomDatabase.Callback() {
+
+            override fun onCreate(db: SupportSQLiteDatabase) {
+                super.onCreate(db)
+                INSTANCE?.let { database ->
+                    scope.launch {
+                        populateDatabase(database.categoryDao())
+                    }
+                }
+            }
+
+            suspend fun populateDatabase(categoryDao: CategoryDao) {
+                categoryDao.deleteAll()
+                categoryDao.insert(Category("Diary"))
+                categoryDao.insert(Category("Cereals"))
+                categoryDao.insert(Category("Beverages"))
+                categoryDao.insert(Category("Proteins"))
+            }
+        }
     }
+
 }

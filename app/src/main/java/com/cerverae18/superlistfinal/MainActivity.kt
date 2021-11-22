@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         this.supportActionBar?.setDisplayShowTitleEnabled(false)
 
         val lists = mutableListOf<List>(
-            List("SORIANA", Date(Calendar.getInstance().timeInMillis)),
+            List("SORIANA", Calendar.getInstance().timeInMillis),
 
         )
 

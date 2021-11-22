@@ -10,6 +10,7 @@ import com.cerverae18.superlistfinal.databinding.ActivityNewListBinding
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import com.cerverae18.superlistfinal.fragments.NewListProductCellFragment
 import com.cerverae18.superlistfinal.logic.entities.Category
 import com.cerverae18.superlistfinal.logic.entities.Product
 import java.text.SimpleDateFormat
@@ -31,12 +32,13 @@ class NewListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityNewListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         this.supportActionBar?.setDisplayHomeAsUpEnabled(true)
         this.supportActionBar?.setDisplayShowTitleEnabled(false)
 
         listNameEditText = binding.listNameEditText
 
-        val products  = listOf<Product>(Product("Pizza", Category("FOOD")), Product("Eggs", Category("FOOD")), Product("Cooking Oil", Category("Cooking")))
+        val products  = listOf<Product>(Product("Pizza", 1), Product("Eggs", 2), Product("Cooking Oil",3))
         val productsAddedToList : HashMap<Product, Int> = hashMapOf()
 
         //ADD ALL PRODUCTS

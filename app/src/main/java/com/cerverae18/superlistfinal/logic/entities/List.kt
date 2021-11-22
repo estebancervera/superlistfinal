@@ -9,8 +9,8 @@ import java.sql.Date
 @Entity
  data class List(
     @ColumnInfo(name = "name") val name: String,
-    @ColumnInfo(name = "date") val date: Date,
+    @ColumnInfo(name = "date") val date: Long,
     ): Serializable {
-    @PrimaryKey(autoGenerate = true) val listId: Int = 0
+    @PrimaryKey(autoGenerate = true) var listId: Int = 0
     }
 
