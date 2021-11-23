@@ -29,7 +29,7 @@
         android:clipToPadding="false">
 
         <LinearLayout
-            android:id="@+id/products"
+            android:id="@+id/master_list_products_frags"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />

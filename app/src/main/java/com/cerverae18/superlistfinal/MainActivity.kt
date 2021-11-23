@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import com.cerverae18.superlistfinal.databinding.ActivityMainBinding
 import com.cerverae18.superlistfinal.logic.entities.List
 import com.cerverae18.superlistfinal.logic.entities.Product
@@ -13,10 +14,20 @@ import java.sql.Date
 import java.util.*
 import kotlin.collections.HashMap
 import com.cerverae18.superlistfinal.fragments.MainActivityListCellFragment
+<<<<<<< HEAD
+import com.cerverae18.superlistfinal.fragments.NewListProductCellFragment
+import com.cerverae18.superlistfinal.logic.ListViewModel
+import com.cerverae18.superlistfinal.logic.ListViewModelFactory
+=======
+>>>>>>> master
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
+    val listViewModel: ListViewModel by viewModels {
+        ListViewModelFactory((application as GeneralApplication).listRepository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,18 +36,22 @@ class MainActivity : AppCompatActivity() {
 
         this.supportActionBar?.setDisplayShowTitleEnabled(false)
 
+<<<<<<< HEAD
+=======
         val lists = mutableListOf<List>(
             List("SORIANA", Date(Calendar.getInstance().timeInMillis)),
 
         )
+>>>>>>> master
 
 
 
+        listViewModel.allLists.observe(this, { lists ->
+            setupListFrags(lists)
 
-        for(i in 1..20){
-            val frag = MainActivityListCellFragment.newInstance(lists.first())
-            supportFragmentManager.beginTransaction().add(R.id.main_activity_lists_frags, frag).commit()
-        }
+        })
+
+
 
 
 
@@ -56,6 +71,16 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun setupListFrags(lists : kotlin.collections.List<List>){
+        for (fragment in supportFragmentManager.fragments) {
+            supportFragmentManager.beginTransaction().remove(fragment).commit()
+        }
+        lists.forEach { list ->
+            val frag = MainActivityListCellFragment.newInstance(list)
+            supportFragmentManager.beginTransaction().add(R.id.main_activity_lists_frags,frag).commit()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

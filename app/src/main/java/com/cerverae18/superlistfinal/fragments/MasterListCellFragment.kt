@@ -9,14 +9,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import com.cerverae18.superlistfinal.GeneralApplication
+import com.cerverae18.superlistfinal.MasterListActivity
 import com.cerverae18.superlistfinal.databinding.FragmentMasterListCellBinding
+import com.cerverae18.superlistfinal.logic.ProductViewModel
+import com.cerverae18.superlistfinal.logic.ProductViewModelFactory
+import com.cerverae18.superlistfinal.logic.entities.Product
+import com.cerverae18.superlistfinal.logic.entities.relations.ProductWithCategory
 import kotlin.random.Random
 
-// TODO: Rename parameter arguments, choose names that match
+
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_NAME = "productName"
-private const val ARG_CATEGORY = "productCategory"
+private const val ARG_PRODUCT = "ARG_PRODUCT"
+
 
 /**
  * A simple [Fragment] subclass.
@@ -24,42 +31,46 @@ private const val ARG_CATEGORY = "productCategory"
  * create an instance of this fragment.
  */
 class MasterListCellFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var name: String? = null
-    private var category: String? = null
+
+    private var product: ProductWithCategory? = null
+
     private var _binding: FragmentMasterListCellBinding? = null
     private val binding get() = _binding!!
 
     lateinit var dialogBuilder: AlertDialog.Builder
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            name = it.getString(ARG_NAME)
-            category = it.getString(ARG_CATEGORY)
+            product = it.getSerializable(ARG_PRODUCT) as ProductWithCategory
+
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         _binding = FragmentMasterListCellBinding.inflate(inflater, parent, false)
-        binding.masterListProductName.text = "$name"
-        binding.masterListProductCategory.text = "$category"
+        binding.masterListProductName.text = "${product?.name}"
+        binding.masterListProductCategory.text = "${product?.category}"
 
 
         dialogBuilder = AlertDialog.Builder(requireActivity())
         dialogBuilder.setTitle("Delete Product")
-        dialogBuilder.setMessage("Are you sure you want to delete this the product: $name?")
+        dialogBuilder.setMessage("Are you sure you want to delete this the product: ${product?.name}?")
 
-        dialogBuilder.setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, whichButton ->
-            //activity?.supportFragmentManager?.popBackStack(requireActivity())
-            //activity?.fragmentManager?.beginTransaction()?.remove(requireActivity() as Fragment!)?.commit()
-          //  activity?.supportFragmentManager?.beginTransaction()?.remove(this)?.commit()
-            parentFragmentManager.beginTransaction().remove(this).commit()
+        dialogBuilder.setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, _ ->
+
+
+            val activity =  activity as MasterListActivity
+            product?.let { activity.productViewModel.delete(product!!.id) }
+            //parentFragmentManager.beginTransaction().remove(this).commit()
+
+
             dialog.dismiss()
         })
 
-        dialogBuilder.setNegativeButton("No", DialogInterface.OnClickListener { dialog, whichButton ->
+        dialogBuilder.setNegativeButton("No", DialogInterface.OnClickListener { dialog, _ ->
             // what ever you want to do with No option.
             dialog.dismiss()
         })
@@ -71,17 +82,7 @@ class MasterListCellFragment : Fragment() {
             dialogBuilder.show()
 
         }
-        /*binding.root.background = ColorDrawable(
-            Color.argb(255,
-            Random.nextInt(128, 255),
-            Random.nextInt(128, 255),
-            Random.nextInt(128, 255)))*/
-        /*binding.btnBigger.setOnClickListener {
-            binding.txtFirstName.textSize = size
-            binding.txtLastName.textSize = size
-            binding.txtSex.textSize = size
-            size += 1f
-        }*/
+
         return binding.root
     }
 
@@ -90,17 +91,17 @@ class MasterListCellFragment : Fragment() {
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @param name Parameter 1.
-         * @param category Parameter 2.
+         * @param product Parameter 1.
+
          * @return A new instance of fragment MasterListCellFragment.
          */
-        // TODO: Rename and change types and number of parameters
+
         @JvmStatic
-        fun newInstance(name: String, category: String) =
+        fun newInstance(product: ProductWithCategory) =
             MasterListCellFragment().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_NAME, name)
-                    putString(ARG_CATEGORY, category)
+                    putSerializable(ARG_PRODUCT, product)
+
                 }
             }
     }
