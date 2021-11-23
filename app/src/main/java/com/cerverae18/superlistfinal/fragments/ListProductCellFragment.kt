@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import com.cerverae18.superlistfinal.ListActivity
+import com.cerverae18.superlistfinal.R
 import com.cerverae18.superlistfinal.databinding.FragmentListProductCellBinding
 import com.cerverae18.superlistfinal.logic.entities.Product
 import com.cerverae18.superlistfinal.logic.entities.relations.ListWithProducts
@@ -40,11 +41,19 @@ class ListProductCellFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentListProductCellBinding.inflate(inflater, container, false)
 
+
+
         val productNameText = binding.listProductCellName
         val productCategoryText = binding.listProductCellCategory
-        val productQuantity = binding.textView
+        val productQuantity = binding.listProductQuantity
+        val productCheckBox = binding.productCheckBox
 
-        binding.productCheckBox.isChecked = product?.checked ?: false
+        productCheckBox.isChecked = product?.checked ?: false
+
+        val color = if (!productCheckBox.isChecked) resources.getColor(R.color.lightpurple) else resources.getColor(R.color.light_gray)
+
+        binding.listActivityListCellCardview.setCardBackgroundColor(color)
+
 
         binding.productCheckBox.setOnCheckedChangeListener { button, state ->
             val activity = activity as ListActivity

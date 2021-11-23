@@ -11,4 +11,5 @@
     <color name="darkblue">#FF161E35</color>
     <color name="blue">#FF3071E7</color>
     <color name="lightpurple">#FFA6B2EC</color>
+    <color name="light_gray">#FF9D9D9D</color>
 </resources>
