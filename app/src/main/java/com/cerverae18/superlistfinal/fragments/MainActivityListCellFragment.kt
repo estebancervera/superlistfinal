@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import com.cerverae18.superlistfinal.ListActivity
+import com.cerverae18.superlistfinal.R
 import com.cerverae18.superlistfinal.databinding.FragmentMainActivityListCellBinding
 import com.cerverae18.superlistfinal.logic.EXTRA
 import com.cerverae18.superlistfinal.logic.entities.List
@@ -47,8 +48,8 @@ class MainActivityListCellFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentMainActivityListCellBinding.inflate(inflater, container, false)
 
-        val color = Color.rgb(Random.nextInt(120, 255), Random.nextInt(120, 255), Random.nextInt(120, 255))
-        binding.mainActivityListCellCardview.setCardBackgroundColor(color)
+        // color = Color.rgb(Random.nextInt(120, 255), Random.nextInt(120, 255), Random.nextInt(120, 255))
+        binding.mainActivityListCellCardview.setCardBackgroundColor(resources.getColor(R.color.lightpurple))
         val sdf = SimpleDateFormat("dd/MM/yyyy")
 
         val listNameText = binding.mainActivityListCellName
