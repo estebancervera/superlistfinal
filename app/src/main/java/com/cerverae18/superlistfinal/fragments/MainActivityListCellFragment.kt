@@ -1,9 +1,11 @@
 package com.cerverae18.superlistfinal.fragments
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import com.cerverae18.superlistfinal.ListActivity
 import com.cerverae18.superlistfinal.databinding.FragmentMainActivityListCellBinding
 import com.cerverae18.superlistfinal.logic.entities.List
 import java.text.SimpleDateFormat
@@ -53,6 +55,11 @@ class MainActivityListCellFragment : Fragment() {
         listNameText.text = list?.name
         listDateText.text = sdf.format(list?.date)
         //listDateText.setTextColor(Color.WHITE)
+        binding.imageView.setOnClickListener {
+            Intent(activity, ListActivity::class.java).also {
+                startActivity(it)
+            }
+        }
 
         return binding.root
     }
