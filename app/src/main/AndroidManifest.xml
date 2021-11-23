@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Superlistfinal">
         <activity
+            android:name=".ListActivity"
+            android:exported="true" />
+        <activity
             android:name=".NewListActivity"
             android:exported="true" />
         <activity android:name=".MasterListActivity"

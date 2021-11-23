@@ -14,9 +14,12 @@ import java.sql.Date
 import java.util.*
 import kotlin.collections.HashMap
 import com.cerverae18.superlistfinal.fragments.MainActivityListCellFragment
+<<<<<<< HEAD
 import com.cerverae18.superlistfinal.fragments.NewListProductCellFragment
 import com.cerverae18.superlistfinal.logic.ListViewModel
 import com.cerverae18.superlistfinal.logic.ListViewModelFactory
+=======
+>>>>>>> master
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,6 +36,13 @@ class MainActivity : AppCompatActivity() {
 
         this.supportActionBar?.setDisplayShowTitleEnabled(false)
 
+<<<<<<< HEAD
+=======
+        val lists = mutableListOf<List>(
+            List("SORIANA", Date(Calendar.getInstance().timeInMillis)),
+
+        )
+>>>>>>> master
 
 
 

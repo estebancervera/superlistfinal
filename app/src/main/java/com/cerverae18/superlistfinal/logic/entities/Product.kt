@@ -9,9 +9,9 @@ import java.io.Serializable
 @Entity
  data class Product(
     @ColumnInfo(name = "name") val name: String,
-    @ColumnInfo(name = "category") val categoryId: Int
+    @ColumnInfo(name = "category") val category: Category
     ): Serializable {
-        @PrimaryKey(autoGenerate = true) var productId : Int = 0
+        @PrimaryKey(autoGenerate = true) val productId : Int = 0
     }
 
 

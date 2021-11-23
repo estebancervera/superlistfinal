@@ -25,6 +25,13 @@ import java.util.*
 import android.widget.ArrayAdapter
 import com.cerverae18.superlistfinal.logic.entities.relations.ProductWithCategory
 
+<<<<<<< HEAD
+=======
+import android.widget.LinearLayout
+import com.cerverae18.superlistfinal.fragments.MasterListCellFragment
+import com.cerverae18.superlistfinal.logic.entities.Category
+import com.cerverae18.superlistfinal.logic.entities.Product
+>>>>>>> master
 
 class MasterListActivity : AppCompatActivity() {
 
@@ -94,6 +101,7 @@ class MasterListActivity : AppCompatActivity() {
 
 
 
+<<<<<<< HEAD
 
         val categoryPicker = popupView.findViewById<Spinner>(R.id.categoryPicker)
         val btnCancel = popupView.findViewById<Button>(R.id.master_list_popup_btn_cancel)
@@ -144,6 +152,53 @@ class MasterListActivity : AppCompatActivity() {
         products.forEach { product ->
             val frag = MasterListCellFragment.newInstance(product)
             supportFragmentManager.beginTransaction().add(R.id.master_list_products_frags,frag).commit()
+=======
+            var layout:LinearLayout = LinearLayout(this)
+            layout.orientation = LinearLayout.VERTICAL
+            layout.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.FILL_PARENT,
+                LinearLayout.LayoutParams.FILL_PARENT
+            )
+
+
+            //layout.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.Fill_PARENT)
+            var nameEditText: EditText = EditText(this)
+            nameEditText.setPadding(5,10,5,20)
+            nameEditText.hint = "Product's name"
+
+            var categoryEditText: EditText = EditText(this)
+            categoryEditText.setPadding(5,10,5,20)
+            categoryEditText.hint = "Product's category"
+
+            layout.addView(nameEditText)
+            layout.addView(categoryEditText)
+
+            //dialogBuilder.setView(nameEditText)
+            //dialogBuilder.setView(categoryEditText)
+            dialogBuilder.setView(layout)
+            dialogBuilder.setTitle("Enter name of the product you wish to add")
+
+            dialogBuilder.setPositiveButton("Create", DialogInterface.OnClickListener { dialog, whichButton ->
+                //What ever you want to do with the value
+                //val editTextVal: Editable = editText.text.toString()
+                //OR
+                val productName: String = nameEditText.text.toString()
+                val productCategory: String = categoryEditText.text.toString()
+                val newProduct: Product = Product( productName, Category(productCategory))
+
+                var frag = MasterListCellFragment.newInstance(newProduct.name, newProduct.category.name)
+                supportFragmentManager.beginTransaction()
+                    .add(R.id.products, frag).commit()
+                dialog.dismiss()
+            })
+
+            dialogBuilder.setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, whichButton ->
+                // what ever you want to do with No option.
+                dialog.dismiss()
+            })
+
+             dialogBuilder.show()
+>>>>>>> master
         }
     }
 

@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+<<<<<<< HEAD
 import com.cerverae18.superlistfinal.fragments.MasterListCellFragment
 import com.cerverae18.superlistfinal.fragments.NewListProductCellFragment
 import com.cerverae18.superlistfinal.logic.*
@@ -18,6 +19,11 @@ import com.cerverae18.superlistfinal.logic.entities.Category
 import com.cerverae18.superlistfinal.logic.entities.Product
 import com.cerverae18.superlistfinal.logic.entities.ProductListCrossRef
 import com.cerverae18.superlistfinal.logic.entities.relations.ProductWithCategory
+=======
+import com.cerverae18.superlistfinal.fragments.NewListProductCellFragment
+import com.cerverae18.superlistfinal.logic.entities.Category
+import com.cerverae18.superlistfinal.logic.entities.Product
+>>>>>>> master
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
