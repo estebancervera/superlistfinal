@@ -7,9 +7,12 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.cerverae18.superlistfinal.databinding.ActivityMainBinding
+import com.cerverae18.superlistfinal.logic.entities.List
+import com.cerverae18.superlistfinal.logic.entities.Product
 import java.sql.Date
 import java.util.*
 import kotlin.collections.HashMap
+import com.cerverae18.superlistfinal.fragments.MainActivityListCellFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,18 +25,9 @@ class MainActivity : AppCompatActivity() {
 
         this.supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        val lists = mutableListOf<List>(List("SORIANA", Date(Calendar.getInstance().timeInMillis), HashMap<Product, Int>()),
-            List("LUNES", Date(Calendar.getInstance().timeInMillis), HashMap<Product, Int>()),
-            List(
-                "WALLMART",
-                Date(Calendar.getInstance().timeInMillis),
-                HashMap<Product, Int>()
-            ),
-            List(
-                "CENA",
-                Date(Calendar.getInstance().timeInMillis),
-                HashMap<Product, Int>()
-            )
+        val lists = mutableListOf<List>(
+            List("SORIANA", Date(Calendar.getInstance().timeInMillis)),
+
         )
 
 
