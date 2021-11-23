@@ -57,7 +57,8 @@ class NewListActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         this.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        this.supportActionBar?.setDisplayShowTitleEnabled(false)
+        //this.supportActionBar?.setDisplayShowTitleEnabled(false)
+        this.supportActionBar?.title = getString(R.string.new_list_title)
 
         listNameEditText = binding.listNameEditText
 

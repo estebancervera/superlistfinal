@@ -32,6 +32,8 @@ class ListActivity : AppCompatActivity() {
         this.supportActionBar?.setDisplayHomeAsUpEnabled(true)
         this.supportActionBar?.setDisplayShowTitleEnabled(false)
 
+
+
         val listId = intent.getStringExtra(EXTRA.EXTRA_LIST_ID)
 
 

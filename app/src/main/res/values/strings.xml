@@ -30,6 +30,10 @@
     <string name="sort_switch">Sort</string>
     <string name="alphabetical">ABC.</string>
     <string name="categorty">CAT.</string>
+    <string name="lists_title">LISTS</string>
+    <string name="new_list_title">ADD NEW LIST</string>
+    <string name="master_list_title">PRODUCTS</string>
+
 
 
 </resources>

@@ -59,7 +59,8 @@ class MasterListActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         this.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        this.supportActionBar?.setDisplayShowTitleEnabled(false)
+     //   this.supportActionBar?.setDisplayShowTitleEnabled(false)
+        this.supportActionBar?.title = getString(R.string.master_list_title)
 
         dialogBuilder = AlertDialog.Builder(this)
 

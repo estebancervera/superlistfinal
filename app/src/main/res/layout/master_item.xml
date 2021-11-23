@@ -14,8 +14,8 @@
         android:layout_marginStart="10dp"
 
 
-        android:text="@string/master_list"
-        android:textSize="18sp"
+        android:text="@string/master_list_title"
+        android:textSize="14sp"
         android:textStyle="bold" />
 
     <ImageButton

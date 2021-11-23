@@ -4,8 +4,8 @@
 
     <item
         android:id="@+id/master_list"
-        android:icon="@drawable/ic_master_list_24"
-        android:title="@string/master_list"
         android:actionLayout="@layout/master_item"
-        app:showAsAction="always"/>
+        android:icon="@drawable/ic_master_list_24"
+        android:title="@string/master_list_title"
+        app:showAsAction="always" />
 </menu>

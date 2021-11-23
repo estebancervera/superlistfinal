@@ -30,8 +30,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        this.supportActionBar?.setDisplayShowTitleEnabled(false)
+       // this.supportActionBar?.setDisplayShowTitleEnabled(false)
 
+        this.supportActionBar?.title = getString(R.string.lists_title)
 
         listViewModel.allLists.observe(this, { lists ->
             setupListFrags(lists)
