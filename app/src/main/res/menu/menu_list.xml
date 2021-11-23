@@ -6,6 +6,7 @@
         android:id="@+id/sorting_switch"
         android:title="@string/sort_switch"
         app:actionLayout="@layout/switch_item"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        />
 
 </menu>

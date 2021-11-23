@@ -3,12 +3,19 @@ package com.cerverae18.superlistfinal.logic
 import androidx.lifecycle.*
 import com.cerverae18.superlistfinal.logic.entities.Product
 import com.cerverae18.superlistfinal.logic.entities.ProductListCrossRef
+import com.cerverae18.superlistfinal.logic.entities.relations.ListWithProducts
 import com.cerverae18.superlistfinal.logic.entities.relations.ProductWithCategory
 import kotlinx.coroutines.launch
 
 class ProductListViewController {
 }
 class ProductListViewModel(private val repository: ProductListRepository): ViewModel() {
+
+    fun productsFromList(id: String): LiveData<List<ListWithProducts>> = repository.getProductsFromList(id).asLiveData()
+
+    fun update(id: String, checked: Boolean) = viewModelScope.launch {
+        repository.update(id, checked)
+    }
 
     fun insert(product: ProductListCrossRef) = viewModelScope.launch {
         repository.insert(product)

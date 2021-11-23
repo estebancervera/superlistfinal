@@ -6,16 +6,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
+import android.widget.ImageButton
 import androidx.activity.viewModels
 import com.cerverae18.superlistfinal.databinding.ActivityMainBinding
 import com.cerverae18.superlistfinal.logic.entities.List
-import com.cerverae18.superlistfinal.logic.entities.Product
-import java.sql.Date
-import java.util.*
-import kotlin.collections.HashMap
 import com.cerverae18.superlistfinal.fragments.MainActivityListCellFragment
 
-import com.cerverae18.superlistfinal.fragments.NewListProductCellFragment
 import com.cerverae18.superlistfinal.logic.ListViewModel
 import com.cerverae18.superlistfinal.logic.ListViewModelFactory
 
@@ -75,6 +72,17 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
+        menu?.findItem(R.id.master_list)?.setActionView(R.layout.master_item)
+
+        val btn =
+            menu?.findItem(R.id.master_list)?.actionView?.findViewById<ImageButton>(R.id.btn_master_list) as ImageButton
+
+        btn.setOnClickListener {
+            Intent(this, MasterListActivity::class.java).also {
+                startActivity(it)
+            }
+        }
+
         return super.onCreateOptionsMenu(menu)
     }
 

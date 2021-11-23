@@ -7,6 +7,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import com.cerverae18.superlistfinal.ListActivity
 import com.cerverae18.superlistfinal.databinding.FragmentMainActivityListCellBinding
+import com.cerverae18.superlistfinal.logic.EXTRA
 import com.cerverae18.superlistfinal.logic.entities.List
 import java.text.SimpleDateFormat
 import java.util.*
@@ -56,8 +57,9 @@ class MainActivityListCellFragment : Fragment() {
         listNameText.text = list?.name
         listDateText.text = sdf.format(list?.date?.let { Date(it) })
         //listDateText.setTextColor(Color.WHITE)
-        binding.imageView.setOnClickListener {
+        binding.mainActivityListCellCardview.setOnClickListener {
             Intent(activity, ListActivity::class.java).also {
+                it.putExtra(EXTRA.EXTRA_LIST_ID, list?.listId)
                 startActivity(it)
             }
         }
