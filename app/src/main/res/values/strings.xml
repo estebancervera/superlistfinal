@@ -24,6 +24,8 @@
     <string name="product_list_product_category">"Product Category"</string>
     <string name="product_list_qty">0</string>
     <string name="sort_switch">Sort</string>
+    <string name="alphabetical">ABC.</string>
+    <string name="categorty">CAT.</string>
 
 
 </resources>
