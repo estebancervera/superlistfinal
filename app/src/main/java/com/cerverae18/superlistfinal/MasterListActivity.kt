@@ -106,7 +106,7 @@ class MasterListActivity : AppCompatActivity() {
         val editTextName = popupView.findViewById<EditText>(R.id.new_product_edit_name)
 
 
-        editTextName.setOnKeyListener { view, keyCode, keyEvent ->
+        editTextName.setOnKeyListener { view, keyCode, _ ->
             if (keyCode == KeyEvent.KEYCODE_ENTER){
 
                 removeFocusEditText(view as EditText)

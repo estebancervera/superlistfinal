@@ -1,29 +1,23 @@
 package com.cerverae18.superlistfinal
 
 
+import android.annotation.SuppressLint
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputFilter
-import android.util.Log
 import android.view.*
-import com.cerverae18.superlistfinal.databinding.ActivityNewListBinding
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
-import com.cerverae18.superlistfinal.fragments.MasterListCellFragment
-import com.cerverae18.superlistfinal.logic.*
-import com.cerverae18.superlistfinal.logic.entities.ProductListCrossRef
-import com.cerverae18.superlistfinal.logic.entities.relations.ProductWithCategory
-
+import androidx.appcompat.app.AppCompatActivity
+import com.cerverae18.superlistfinal.databinding.ActivityNewListBinding
 import com.cerverae18.superlistfinal.fragments.NewListProductCellFragment
-import com.cerverae18.superlistfinal.logic.entities.Category
+import com.cerverae18.superlistfinal.logic.*
 import com.cerverae18.superlistfinal.logic.entities.Product
-
+import com.cerverae18.superlistfinal.logic.entities.ProductListCrossRef
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.HashMap
 
 
 class NewListActivity : AppCompatActivity() {
@@ -97,7 +91,7 @@ class NewListActivity : AppCompatActivity() {
               return@setOnClickListener
             }
             val name = listNameEditText.text.toString()
-            var timestamp: Long = 0L
+            var timestamp = 0L
                 listDate?.let {  timestamp = listDate as Long }
             val uuid = UUID.randomUUID().toString()
             listViewModel.insert(com.cerverae18.superlistfinal.logic.entities.List( uuid, name, timestamp))
@@ -165,6 +159,7 @@ class NewListActivity : AppCompatActivity() {
     }
 
 
+    @SuppressLint("SimpleDateFormat", "InflateParams")
     private fun showCalendarPopUpView(view: View){
         val inflater = layoutInflater
         val  popupView = inflater.inflate(R.layout.new_list_select_date_popup, null)
