@@ -5,12 +5,12 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.io.Serializable
 import java.sql.Date
+import java.util.*
 
 @Entity
  data class List(
+ @PrimaryKey(autoGenerate = false) val listId: String,
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "date") val date: Long,
-    ): Serializable {
-    @PrimaryKey(autoGenerate = true) var listId: Int = 0
-    }
+): Serializable
 

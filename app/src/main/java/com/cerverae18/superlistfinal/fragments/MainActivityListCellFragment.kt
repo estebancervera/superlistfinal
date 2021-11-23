@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import com.cerverae18.superlistfinal.databinding.FragmentMainActivityListCellBinding
 import com.cerverae18.superlistfinal.logic.entities.List
 import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.random.Random
 
 
@@ -51,7 +52,7 @@ class MainActivityListCellFragment : Fragment() {
         val listDateText = binding.mainActivityListCellDate
         //listNameText.setTextColor(Color.WHITE)
         listNameText.text = list?.name
-        listDateText.text = sdf.format(list?.date)
+        listDateText.text = sdf.format(list?.date?.let { Date(it) })
         //listDateText.setTextColor(Color.WHITE)
 
         return binding.root

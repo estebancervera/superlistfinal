@@ -12,11 +12,13 @@ import com.cerverae18.superlistfinal.logic.entities.ProductListCrossRef
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = [Product::class, List::class, ProductListCrossRef::class, Category::class], version = 2)
+@Database(entities = [Product::class, List::class, ProductListCrossRef::class, Category::class], version = 6)
 abstract class AppRoomDatabase : RoomDatabase() {
 
     abstract fun productDao(): ProductDao
     abstract fun categoryDao(): CategoryDao
+    abstract fun listDao(): ListDao
+    abstract fun productListDao(): ProductListDao
 
     // Singleton
     companion object {
@@ -27,7 +29,8 @@ abstract class AppRoomDatabase : RoomDatabase() {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    AppRoomDatabase::class.java, "app_database").fallbackToDestructiveMigration()
+                    AppRoomDatabase::class.java, "app_database")
+                    .fallbackToDestructiveMigration()
                     .addCallback(AppDatabaseCallback(scope))
                     .build()
                 INSTANCE = instance
@@ -41,6 +44,15 @@ abstract class AppRoomDatabase : RoomDatabase() {
 
             override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)
+                INSTANCE?.let { database ->
+                    scope.launch {
+                        populateDatabase(database.categoryDao())
+                    }
+                }
+            }
+
+            override fun onDestructiveMigration(db: SupportSQLiteDatabase) {
+                super.onDestructiveMigration(db)
                 INSTANCE?.let { database ->
                     scope.launch {
                         populateDatabase(database.categoryDao())

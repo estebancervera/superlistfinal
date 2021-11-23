@@ -9,10 +9,15 @@ import android.view.*
 import com.cerverae18.superlistfinal.databinding.ActivityNewListBinding
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import com.cerverae18.superlistfinal.fragments.MasterListCellFragment
 import com.cerverae18.superlistfinal.fragments.NewListProductCellFragment
+import com.cerverae18.superlistfinal.logic.*
 import com.cerverae18.superlistfinal.logic.entities.Category
 import com.cerverae18.superlistfinal.logic.entities.Product
+import com.cerverae18.superlistfinal.logic.entities.ProductListCrossRef
+import com.cerverae18.superlistfinal.logic.entities.relations.ProductWithCategory
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
@@ -26,6 +31,22 @@ class NewListActivity : AppCompatActivity() {
     private lateinit var listNameEditText: EditText
     private var dateWasSelected = false
 
+    private lateinit var productsAddedToList: HashMap<Product, Int>
+
+    private lateinit var lists : List<com.cerverae18.superlistfinal.logic.entities.List>
+
+
+    val productViewModel: ProductViewModel by viewModels {
+        ProductViewModelFactory((application as GeneralApplication).productRepository)
+    }
+
+    val listViewModel: ListViewModel by viewModels {
+        ListViewModelFactory((application as GeneralApplication).listRepository)
+    }
+
+    val productListViewModel: ProductListViewModel by viewModels {
+        ProductListViewModelFactory((application as GeneralApplication).productListRepository)
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,18 +59,17 @@ class NewListActivity : AppCompatActivity() {
 
         listNameEditText = binding.listNameEditText
 
-        val products  = listOf<Product>(Product("Pizza", 1), Product("Eggs", 2), Product("Cooking Oil",3))
-        val productsAddedToList : HashMap<Product, Int> = hashMapOf()
+        productsAddedToList  = hashMapOf()
 
         //ADD ALL PRODUCTS
-        // TODO()  GET DATA FROM DATABASE FOR PRODUCTS
-        if(savedInstanceState == null) {
-            products.forEach { product ->
-                val frag = NewListProductCellFragment.newInstance(product, productsAddedToList)
-                supportFragmentManager.beginTransaction().add(R.id.newListProductsFrags, frag)
-                    .commit()
-            }
-        }
+
+        productViewModel.allProducts.observe(this, { products ->
+            setupProductFrags(products, productsAddedToList)
+        })
+
+        listViewModel.allLists.observe(this, { lists ->
+            this.lists = lists
+        })
 
 
         binding.btnSelectDate.setOnClickListener {
@@ -62,17 +82,30 @@ class NewListActivity : AppCompatActivity() {
         binding.btnSaveList.setOnClickListener {
             var missingFields = 0
             val noName = listNameEditText.text.toString() == ""
-            val noProducts = productsAddedToList.isEmpty()
+            val noProducts =  false//productsAddedToList.isEmpty()
             val noDate = !dateWasSelected
 
-            Log.i("EACS", productsAddedToList.toString())
+
             if(noDate || noName || noProducts){
               createAlertDialog(R.string.missing_information, R.string.missing_information_message)
               return@setOnClickListener
             }
+            val name = listNameEditText.text.toString()
+            var timestamp: Long = 0L
+                listDate?.let {  timestamp = listDate as Long }
+            val uuid = UUID.randomUUID().toString()
+            listViewModel.insert(com.cerverae18.superlistfinal.logic.entities.List( uuid, name, timestamp))
+
+            Log.i("EACS", "ESTAMOS AFUERA")
+
+             for ((product, qty) in productsAddedToList) {
+                Log.i("EACS", "ESTAMOS ADENTRO")
+                val productList = ProductListCrossRef(product.productId, qty, uuid)
+                Log.i("EACS", "${productList.listId}")
+                productListViewModel.insert(productList)
+                }
 
 
-           //TODO() ADD LIST TO DATABASE AND SEND TO MAIN MENU
             finish()
         }
 
@@ -113,6 +146,16 @@ class NewListActivity : AppCompatActivity() {
         imm.hideSoftInputFromWindow(editText.windowToken, 0)
         editText.isFocusable = false
         editText.isFocusableInTouchMode = true
+    }
+
+    private fun setupProductFrags(products : List<Product>, hashMap: HashMap<Product, Int>){
+        for (fragment in supportFragmentManager.fragments) {
+            supportFragmentManager.beginTransaction().remove(fragment).commit()
+        }
+        products.forEach { product ->
+            val frag = NewListProductCellFragment.newInstance(product, hashMap)
+            supportFragmentManager.beginTransaction().add(R.id.newListProductsFrags,frag).commit()
+        }
     }
 
 

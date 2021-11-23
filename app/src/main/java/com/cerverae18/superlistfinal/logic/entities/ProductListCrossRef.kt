@@ -5,11 +5,11 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import java.io.Serializable
 
-@Entity(primaryKeys = ["productId", "listId"], tableName = "Product_list")
+@Entity(primaryKeys = ["productId", "listId"], tableName = "Product_List")
 data class ProductListCrossRef(
     val productId: Int,
     val quantity: Int,
-    val listId: Int
-
+    val listId: String,
+    val checked: Boolean = false
 ): Serializable
 

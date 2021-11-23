@@ -1,12 +1,16 @@
 package com.cerverae18.superlistfinal
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import com.cerverae18.superlistfinal.databinding.ActivityMasterListBinding
 import android.content.DialogInterface
+import android.util.Log
 import android.view.Gravity
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.activity.viewModels
 import com.cerverae18.superlistfinal.fragments.MasterListCellFragment
@@ -19,8 +23,7 @@ import com.cerverae18.superlistfinal.logic.entities.Product
 import java.text.SimpleDateFormat
 import java.util.*
 import android.widget.ArrayAdapter
-
-
+import com.cerverae18.superlistfinal.logic.entities.relations.ProductWithCategory
 
 
 class MasterListActivity : AppCompatActivity() {
@@ -56,13 +59,14 @@ class MasterListActivity : AppCompatActivity() {
 
         dialogBuilder = AlertDialog.Builder(this)
 
-        productViewModel.allSongs.observe(this, { products ->
+        productViewModel.allProductsWithCategories.observe(this, { products ->
             setupProductFrags(products)
         })
 
         categoryViewModel.allCategories.observe(this, { categories ->
               this.categories = categories
         })
+
 
 
 
@@ -82,27 +86,44 @@ class MasterListActivity : AppCompatActivity() {
         // create the popup window
         val width = LinearLayout.LayoutParams.WRAP_CONTENT
         val height = LinearLayout.LayoutParams.WRAP_CONTENT
-        val focusable = false // lets taps outside the popup also dismiss it
+        val focusable = true
 
         val popupWindow = PopupWindow(popupView, width, height, focusable)
         popupWindow.elevation = 20f
+
+
+
+
 
         val categoryPicker = popupView.findViewById<Spinner>(R.id.categoryPicker)
         val btnCancel = popupView.findViewById<Button>(R.id.master_list_popup_btn_cancel)
         val btnAdd = popupView.findViewById<Button>(R.id.master_list_popup_add_btn)
         val editTextName = popupView.findViewById<EditText>(R.id.new_product_edit_name)
 
+
+        editTextName.setOnKeyListener { view, keyCode, keyEvent ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER){
+
+                removeFocusEditText(view as EditText)
+                return@setOnKeyListener true
+            }
+            false
+
+        }
+
         val spinnerArrayAdapter: ArrayAdapter<String> = ArrayAdapter<String>(
             this, android.R.layout.simple_spinner_item, categories.map { category -> category.name  }
         )
         categoryPicker.adapter = spinnerArrayAdapter
 
+
         btnAdd.setOnClickListener {
             //TODO() CHECK IF NULL ANY VALUE AND SHOW ALERT
             val name = editTextName.text.toString()
-            val category =  categoryPicker.selectedItemPosition
+            val category =  categoryPicker.selectedItemPosition + 1
 
             addProduct(name, category)
+            popupWindow.dismiss()
 
         }
 
@@ -116,7 +137,7 @@ class MasterListActivity : AppCompatActivity() {
 
     }
 
-    private fun setupProductFrags(products : List<Product>){
+    private fun setupProductFrags(products : List<ProductWithCategory>){
         for (fragment in supportFragmentManager.fragments) {
             supportFragmentManager.beginTransaction().remove(fragment).commit()
         }
@@ -128,6 +149,13 @@ class MasterListActivity : AppCompatActivity() {
 
     private fun addProduct(name: String, category: Int){
         productViewModel.insert(Product(name, category))
+    }
+
+    private fun removeFocusEditText(editText : EditText){
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(editText.windowToken, 0)
+        editText.isFocusable = false
+        editText.isFocusableInTouchMode = true
     }
 
     override fun onSupportNavigateUp(): Boolean {

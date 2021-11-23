@@ -17,6 +17,7 @@ import com.cerverae18.superlistfinal.databinding.FragmentMasterListCellBinding
 import com.cerverae18.superlistfinal.logic.ProductViewModel
 import com.cerverae18.superlistfinal.logic.ProductViewModelFactory
 import com.cerverae18.superlistfinal.logic.entities.Product
+import com.cerverae18.superlistfinal.logic.entities.relations.ProductWithCategory
 import kotlin.random.Random
 
 
@@ -31,7 +32,7 @@ private const val ARG_PRODUCT = "ARG_PRODUCT"
  */
 class MasterListCellFragment : Fragment() {
 
-    private var product: Product? = null
+    private var product: ProductWithCategory? = null
 
     private var _binding: FragmentMasterListCellBinding? = null
     private val binding get() = _binding!!
@@ -42,7 +43,7 @@ class MasterListCellFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            product = it.getSerializable(ARG_PRODUCT) as Product
+            product = it.getSerializable(ARG_PRODUCT) as ProductWithCategory
 
         }
     }
@@ -51,7 +52,7 @@ class MasterListCellFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentMasterListCellBinding.inflate(inflater, parent, false)
         binding.masterListProductName.text = "${product?.name}"
-        binding.masterListProductCategory.text = "${product?.categoryId}"
+        binding.masterListProductCategory.text = "${product?.category}"
 
 
         dialogBuilder = AlertDialog.Builder(requireActivity())
@@ -62,7 +63,7 @@ class MasterListCellFragment : Fragment() {
 
 
             val activity =  activity as MasterListActivity
-            product?.let { activity.productViewModel.delete(it) }
+            product?.let { activity.productViewModel.delete(product!!.id) }
             //parentFragmentManager.beginTransaction().remove(this).commit()
 
 
@@ -96,7 +97,7 @@ class MasterListCellFragment : Fragment() {
          */
 
         @JvmStatic
-        fun newInstance(product: Product) =
+        fun newInstance(product: ProductWithCategory) =
             MasterListCellFragment().apply {
                 arguments = Bundle().apply {
                     putSerializable(ARG_PRODUCT, product)
