@@ -21,7 +21,6 @@ private const val ARG_PRODUCTS_ADDED_LIST = "EXTRA_PRODUCTS_ADDED_LIST"
 class NewListProductCellFragment : Fragment() {
 
 
-
     private var product: Product? = null
     private var productsAdded: HashMap<Product, Int>? = null
 

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="@color/cardview_light_background"
+    android:padding="10dp">
+
+    <EditText
+        android:id="@+id/new_product_edit_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="@string/new_list_product_cell_default_item_name"
+        android:inputType="textPersonName"
+        android:minHeight="48dp" />
+
+    <Button
+        android:id="@+id/master_list_popup_add_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/categoryPicker"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/add" />
+
+    <Button
+        android:id="@+id/master_list_popup_btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/categoryPicker"
+        android:layout_alignParentStart="true"
+
+
+        android:layout_marginTop="10dp"
+        android:text="@string/cancel" />
+
+    <Spinner
+        android:id="@+id/categoryPicker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/new_product_edit_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:minHeight="48dp"
+
+        tools:ignore="SpeakableTextPresentCheck" />
+
+</RelativeLayout>

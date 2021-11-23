@@ -11,7 +11,7 @@
     android:layout_marginBottom="9dp"
     app:cardBackgroundColor="@android:color/secondary_text_light_nodisable"
     app:cardCornerRadius="8dp"
-    tools:context=".MainActivityListCellFragment">
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

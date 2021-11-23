@@ -1,6 +1,9 @@
 package com.cerverae18.superlistfinal.fragments
 
+<<<<<<< HEAD:app/src/main/java/com/cerverae18/superlistfinal/fragments/MainActivityListCellFragment.kt
+=======
 import android.content.Intent
+>>>>>>> master:app/src/main/java/com/cerverae18/superlistfinal/MainActivityListCellFragment.kt
 import android.graphics.Color
 import android.os.Bundle
 import android.view.*
@@ -53,7 +56,7 @@ class MainActivityListCellFragment : Fragment() {
         val listDateText = binding.mainActivityListCellDate
         //listNameText.setTextColor(Color.WHITE)
         listNameText.text = list?.name
-        listDateText.text = sdf.format(list?.date)
+        listDateText.text = sdf.format(list?.date?.let { Date(it) })
         //listDateText.setTextColor(Color.WHITE)
         binding.imageView.setOnClickListener {
             Intent(activity, ListActivity::class.java).also {
