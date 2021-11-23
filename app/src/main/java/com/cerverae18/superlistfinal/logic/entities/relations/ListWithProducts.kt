@@ -15,9 +15,5 @@ data class ListWithProducts (
         entityColumn = "productId",
         associateBy = Junction(ProductListCrossRef::class)
     )
-<<<<<<< HEAD
     val products: kotlin.collections.List<Product>
-=======
-    val product: kotlin.collections.List<Product>
->>>>>>> master
     )

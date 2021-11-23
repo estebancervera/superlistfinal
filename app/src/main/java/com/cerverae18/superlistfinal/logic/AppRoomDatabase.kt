@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-<<<<<<< HEAD
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.cerverae18.superlistfinal.logic.entities.Category
 import com.cerverae18.superlistfinal.logic.entities.List
@@ -20,15 +19,6 @@ abstract class AppRoomDatabase : RoomDatabase() {
     abstract fun categoryDao(): CategoryDao
     abstract fun listDao(): ListDao
     abstract fun productListDao(): ProductListDao
-=======
-import com.cerverae18.superlistfinal.logic.entities.Product
-import kotlinx.coroutines.CoroutineScope
-
-@Database(entities = arrayOf(Product::class,), version = 1)
-abstract class AppRoomDatabase : RoomDatabase() {
-
-    abstract fun productDao(): ProductDao
->>>>>>> master
 
     // Singleton
     companion object {
@@ -40,12 +30,8 @@ abstract class AppRoomDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppRoomDatabase::class.java, "app_database")
-<<<<<<< HEAD
                     .fallbackToDestructiveMigration()
                     .addCallback(AppDatabaseCallback(scope))
-=======
-                   // .addCallback(MusicDatabaseCallback(scope))
->>>>>>> master
                     .build()
                 INSTANCE = instance
                 // return instance
@@ -53,7 +39,6 @@ abstract class AppRoomDatabase : RoomDatabase() {
             }
         }
         // ADD Callback in case we need to populate database on creation
-<<<<<<< HEAD
 
         private class AppDatabaseCallback(private val scope: CoroutineScope) : RoomDatabase.Callback() {
 
@@ -85,7 +70,4 @@ abstract class AppRoomDatabase : RoomDatabase() {
         }
     }
 
-=======
-    }
->>>>>>> master
 }

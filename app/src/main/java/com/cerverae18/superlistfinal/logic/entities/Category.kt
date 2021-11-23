@@ -10,10 +10,6 @@ import java.io.Serializable
  data class Category(
     @ColumnInfo(name = "name") val name: String
     ): Serializable {
-<<<<<<< HEAD
     @PrimaryKey(autoGenerate = true) var categoryId : Int = 0
-=======
-    @PrimaryKey(autoGenerate = true) val categoryId : Int = 0
->>>>>>> master
     }
 

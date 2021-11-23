@@ -1,9 +1,5 @@
 package com.cerverae18.superlistfinal.fragments
 
-<<<<<<< HEAD:app/src/main/java/com/cerverae18/superlistfinal/fragments/MainActivityListCellFragment.kt
-=======
-import android.content.Intent
->>>>>>> master:app/src/main/java/com/cerverae18/superlistfinal/MainActivityListCellFragment.kt
 import android.graphics.Color
 import android.os.Bundle
 import android.view.*

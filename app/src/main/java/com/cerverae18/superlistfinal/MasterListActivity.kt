@@ -25,13 +25,6 @@ import java.util.*
 import android.widget.ArrayAdapter
 import com.cerverae18.superlistfinal.logic.entities.relations.ProductWithCategory
 
-<<<<<<< HEAD
-=======
-import android.widget.LinearLayout
-import com.cerverae18.superlistfinal.fragments.MasterListCellFragment
-import com.cerverae18.superlistfinal.logic.entities.Category
-import com.cerverae18.superlistfinal.logic.entities.Product
->>>>>>> master
 
 class MasterListActivity : AppCompatActivity() {
 
