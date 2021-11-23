@@ -82,9 +82,9 @@ class NewListActivity : AppCompatActivity() {
         }
 
         binding.btnSaveList.setOnClickListener {
-            var missingFields = 0
+
             val noName = listNameEditText.text.toString() == ""
-            val noProducts =  false//productsAddedToList.isEmpty()
+            val noProducts =  productsAddedToList.isEmpty()
             val noDate = !dateWasSelected
 
 
@@ -98,12 +98,12 @@ class NewListActivity : AppCompatActivity() {
             val uuid = UUID.randomUUID().toString()
             listViewModel.insert(com.cerverae18.superlistfinal.logic.entities.List( uuid, name, timestamp))
 
-            Log.i("EACS", "ESTAMOS AFUERA")
+
 
              for ((product, qty) in productsAddedToList) {
-                Log.i("EACS", "ESTAMOS ADENTRO")
+
                 val productList = ProductListCrossRef(product.productId, qty, uuid)
-                Log.i("EACS", "${productList.listId}")
+
                 productListViewModel.insert(productList)
                 }
 

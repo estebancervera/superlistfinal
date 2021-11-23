@@ -8,16 +8,14 @@ import com.cerverae18.superlistfinal.databinding.ActivityListBinding
 import com.cerverae18.superlistfinal.fragments.ListProductCellFragment
 import com.cerverae18.superlistfinal.logic.entities.Category
 import com.cerverae18.superlistfinal.logic.entities.Product
-
-
-
+import com.cerverae18.superlistfinal.logic.entities.relations.ProductWithCategory
 
 
 class ListActivity : AppCompatActivity() {
 
     // Binding to retrieve this activity's views
     private lateinit var binding: ActivityListBinding
-    private lateinit var products: MutableList<Product>
+    private lateinit var products: MutableList<ProductWithCategory>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +25,7 @@ class ListActivity : AppCompatActivity() {
         this.supportActionBar?.setDisplayHomeAsUpEnabled(true)
         this.supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        products = mutableListOf<Product>()
+        products = mutableListOf<ProductWithCategory>()
         val categories = mutableListOf<Category>(
             Category("Cereals"),
             Category("Proteins"),
@@ -36,7 +34,7 @@ class ListActivity : AppCompatActivity() {
         val c = listOf<String>("A","B", "C", "D", "E", "F", "G","H", "I", "J", "K", "L")
 
         for (i in 1..10) {
-            products.add(Product(c.random(), categories.random()))
+            products.add(ProductWithCategory(0, c.random(), categories.random().name))
         }
 
         setFragmentsByAlphabeticalOrder(products)
@@ -48,15 +46,15 @@ class ListActivity : AppCompatActivity() {
         return true
     }
 
-    private fun setFragmentsByAlphabeticalOrder(products: MutableList<Product>) {
+    private fun setFragmentsByAlphabeticalOrder(products: MutableList<ProductWithCategory>) {
         for (product in products.sortedBy { it.name }) {
             val frag = ListProductCellFragment.newInstance(product)
             supportFragmentManager.beginTransaction().add(R.id.list_activity_products_frags, frag).commit()
         }
     }
 
-    private fun setFragmentsByCategory(products: MutableList<Product>) {
-        for (product in products.sortedWith(compareBy({it.category.name}, {it.name})) ){
+    private fun setFragmentsByCategory(products: MutableList<ProductWithCategory>) {
+        for (product in products.sortedWith(compareBy({it.category}, {it.name})) ){
             val frag = ListProductCellFragment.newInstance(product)
             supportFragmentManager.beginTransaction().add(R.id.list_activity_products_frags, frag).commit()
         }

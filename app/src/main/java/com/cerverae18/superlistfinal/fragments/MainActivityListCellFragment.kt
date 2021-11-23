@@ -1,5 +1,6 @@
 package com.cerverae18.superlistfinal.fragments
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.*
@@ -8,6 +9,7 @@ import com.cerverae18.superlistfinal.ListActivity
 import com.cerverae18.superlistfinal.databinding.FragmentMainActivityListCellBinding
 import com.cerverae18.superlistfinal.logic.entities.List
 import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.random.Random
 
 
