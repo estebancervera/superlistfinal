@@ -1,14 +1,17 @@
 package com.cerverae18.superlistfinal
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
+import android.widget.Switch
 import com.cerverae18.superlistfinal.databinding.ActivityListBinding
 import com.cerverae18.superlistfinal.fragments.ListProductCellFragment
 import com.cerverae18.superlistfinal.logic.entities.Category
 import com.cerverae18.superlistfinal.logic.entities.Product
+
+
+
+
 
 class ListActivity : AppCompatActivity() {
 
@@ -28,8 +31,6 @@ class ListActivity : AppCompatActivity() {
         val categories = mutableListOf<Category>(
             Category("Cereals"),
             Category("Proteins"),
-//            Category("Drinks"),
-//            Category("Dairy products"),
         )
 
         val c = listOf<String>("A","B", "C", "D", "E", "F", "G","H", "I", "J", "K", "L")
@@ -68,18 +69,21 @@ class ListActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
+        menuInflater.inflate(R.menu.menu_list, menu)
+        val itemswitch = menu!!.findItem(R.id.sorting_switch)
+        itemswitch.setActionView(R.layout.switch_item)
+
+        val sw = menu.findItem(R.id.sorting_switch).actionView.findViewById(R.id.layout_switch) as Switch
+
+        sw.setOnCheckedChangeListener { buttonView, isChecked ->
+            removeAllFragments()
+            if (isChecked) {
+                setFragmentsByCategory(products)
+            } else {
+                setFragmentsByAlphabeticalOrder(products)
+            }
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.master_list -> {
-                removeAllFragments()
-                setFragmentsByCategory(products)
-            }
-
-        }
-        return super.onOptionsItemSelected(item)
-    }
 }
