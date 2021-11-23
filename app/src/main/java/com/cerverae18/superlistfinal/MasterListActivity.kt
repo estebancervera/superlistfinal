@@ -122,7 +122,11 @@ class MasterListActivity : AppCompatActivity() {
 
 
         btnAdd.setOnClickListener {
-            //TODO() CHECK IF NULL ANY VALUE AND SHOW ALERT
+            val noName = editTextName.text.toString() == ""
+            if(noName){
+                createAlertDialog(R.string.missing_information, R.string.missing_information_message_product)
+                return@setOnClickListener
+            }
             val name = editTextName.text.toString()
             val category =  categoryPicker.selectedItemPosition + 1
 
@@ -151,6 +155,20 @@ class MasterListActivity : AppCompatActivity() {
         imm.hideSoftInputFromWindow(editText.windowToken, 0)
         editText.isFocusable = false
         editText.isFocusableInTouchMode = true
+    }
+
+    private fun createAlertDialog(title: Int, message: Int){
+        val dialog = AlertDialog.Builder(this)
+            .setTitle(getString(title))
+            .setMessage(getString(message))
+            .setNegativeButton(R.string.cancel) { view, _ ->
+                //Toast.makeText(this, "Cancel button pressed", Toast.LENGTH_SHORT).show()
+                view.dismiss()
+            }
+            .setCancelable(false)
+            .create()
+
+        dialog.show()
     }
 
     override fun onSupportNavigateUp(): Boolean {
