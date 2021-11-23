@@ -4,6 +4,7 @@ package com.cerverae18.superlistfinal
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.InputFilter
 import android.util.Log
 import android.view.*
 import com.cerverae18.superlistfinal.databinding.ActivityNewListBinding
@@ -61,6 +62,8 @@ class NewListActivity : AppCompatActivity() {
         this.supportActionBar?.title = getString(R.string.new_list_title)
 
         listNameEditText = binding.listNameEditText
+
+        listNameEditText.filters = arrayOf(InputFilter.LengthFilter(30))
 
         productsAddedToList  = hashMapOf()
 

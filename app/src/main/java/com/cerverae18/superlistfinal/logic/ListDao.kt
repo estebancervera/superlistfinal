@@ -12,6 +12,9 @@ interface ListDao {
     @Query("SELECT * FROM list ORDER BY date ASC")
     fun getAll(): Flow<List<com.cerverae18.superlistfinal.logic.entities.List>>
 
+    @Query("SELECT * FROM list WHERE listId = :id")
+    fun getListById(id: String) : Flow<com.cerverae18.superlistfinal.logic.entities.List>
+
     @Insert
     suspend fun insert(list: com.cerverae18.superlistfinal.logic.entities.List) : Long
 

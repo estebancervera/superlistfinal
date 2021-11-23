@@ -9,6 +9,8 @@ class ListRepository(val listDao: ListDao){
 
     val allLists : Flow<List<com.cerverae18.superlistfinal.logic.entities.List>> = listDao.getAll()
 
+    fun listById(id: String) : Flow<com.cerverae18.superlistfinal.logic.entities.List> = listDao.getListById(id)
+
 
     @WorkerThread
     suspend fun insert(list: com.cerverae18.superlistfinal.logic.entities.List): Long {
