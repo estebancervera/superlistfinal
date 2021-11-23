@@ -9,6 +9,7 @@ import android.content.DialogInterface
 import android.util.Log
 import android.view.Gravity
 import android.view.KeyEvent
+import android.view.Menu
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
@@ -23,6 +24,7 @@ import com.cerverae18.superlistfinal.logic.entities.Product
 import java.text.SimpleDateFormat
 import java.util.*
 import android.widget.ArrayAdapter
+import com.cerverae18.superlistfinal.fragments.ListProductCellFragment
 import com.cerverae18.superlistfinal.logic.entities.relations.ProductWithCategory
 
 
@@ -31,8 +33,10 @@ class MasterListActivity : AppCompatActivity() {
     //AlertDialog used to add a new product to the master list
     lateinit var dialog: AlertDialog
     lateinit var dialogBuilder: AlertDialog.Builder
+    private lateinit var sortingSwitch: Switch
 
     private var categories = listOf<Category>()
+    private lateinit var productsWithCategory: List<ProductWithCategory>
 
 
     //Binding to retrieve this activity's views
@@ -60,15 +64,13 @@ class MasterListActivity : AppCompatActivity() {
         dialogBuilder = AlertDialog.Builder(this)
 
         productViewModel.allProductsWithCategories.observe(this, { products ->
-            setupProductFrags(products)
+            this.productsWithCategory = products
+            updateOnChecked()
         })
 
         categoryViewModel.allCategories.observe(this, { categories ->
               this.categories = categories
         })
-
-
-
 
         val btnAddProduct = binding.btnAddProduct
 
@@ -123,6 +125,7 @@ class MasterListActivity : AppCompatActivity() {
             val category =  categoryPicker.selectedItemPosition + 1
 
             addProduct(name, category)
+            updateOnChecked()
             popupWindow.dismiss()
 
         }
@@ -135,16 +138,6 @@ class MasterListActivity : AppCompatActivity() {
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0)
 
 
-    }
-
-    private fun setupProductFrags(products : List<ProductWithCategory>){
-        for (fragment in supportFragmentManager.fragments) {
-            supportFragmentManager.beginTransaction().remove(fragment).commit()
-        }
-        products.forEach { product ->
-            val frag = MasterListCellFragment.newInstance(product)
-            supportFragmentManager.beginTransaction().add(R.id.master_list_products_frags,frag).commit()
-        }
     }
 
     private fun addProduct(name: String, category: Int){
@@ -162,4 +155,47 @@ class MasterListActivity : AppCompatActivity() {
         finish()
         return true
     }
+
+    private fun setFragmentsByAlphabeticalOrder() {
+        for (product in productsWithCategory.sortedWith(compareBy({it.name}))) {
+            val frag = MasterListCellFragment.newInstance(product)
+            supportFragmentManager.beginTransaction().add(R.id.master_list_products_frags, frag).commit()
+        }
+    }
+
+    private fun setFragmentsByCategory() {
+        for (product in productsWithCategory.sortedWith(compareBy({it.category}, {it.name})) ){
+            val frag = MasterListCellFragment.newInstance(product)
+            supportFragmentManager.beginTransaction().add(R.id.master_list_products_frags, frag).commit()
+        }
+    }
+
+    fun removeAllFragments() {
+        for (fragment in supportFragmentManager.fragments) {
+            supportFragmentManager.beginTransaction().remove(fragment).commit()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_list, menu)
+        val itemswitch = menu!!.findItem(R.id.sorting_switch)
+        itemswitch.setActionView(R.layout.switch_item)
+
+        sortingSwitch = menu.findItem(R.id.sorting_switch).actionView.findViewById(R.id.layout_switch) as Switch
+
+        sortingSwitch.setOnCheckedChangeListener { _, state ->
+            updateOnChecked()
+        }
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    private fun updateOnChecked(){
+        removeAllFragments()
+        if (sortingSwitch.isChecked) {
+            setFragmentsByCategory()
+        } else {
+            setFragmentsByAlphabeticalOrder()
+        }
+    }
+
 }

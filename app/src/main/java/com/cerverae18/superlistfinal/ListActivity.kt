@@ -80,8 +80,6 @@ class ListActivity : AppCompatActivity() {
 
         sortingSwitch.setOnCheckedChangeListener { _, state ->
           updateOnChecked()
-            val text = if (!state) R.string.alphabetical else R.string.categorty
-            itemswitch.actionView.findViewById<TextView>(R.id.master_list_btn_label).text = getString(text)
         }
         return super.onCreateOptionsMenu(menu)
     }
