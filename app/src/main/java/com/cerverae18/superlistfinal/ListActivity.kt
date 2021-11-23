@@ -24,13 +24,17 @@ class ListActivity : AppCompatActivity() {
         ProductListViewModelFactory((application as GeneralApplication).productListRepository)
     }
 
+    val listViewModel: ListViewModel by viewModels {
+        ListViewModelFactory((application as GeneralApplication).listRepository)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         this.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        this.supportActionBar?.setDisplayShowTitleEnabled(false)
+        //this.supportActionBar?.setDisplayShowTitleEnabled(false)
 
 
 
@@ -39,9 +43,14 @@ class ListActivity : AppCompatActivity() {
 
         Log.i("EACS", "$listId")
         if (listId != null) {
+            listViewModel.getListById(listId).observe(this, { list ->
+                this.supportActionBar?.title = list.name
+            })
+
             productListViewModel.productsFromList(listId).observe(this, { products ->
                 this.products = products
                 setFragmentsByAlphabeticalOrder()
+
             })
         }
 

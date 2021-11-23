@@ -10,13 +10,13 @@ class ListViewModel(private val repository: ListRepository): ViewModel() {
     val allLists : LiveData<List<com.cerverae18.superlistfinal.logic.entities.List>> = repository.allLists.asLiveData()
 
 
+    fun getListById(id: String) : LiveData<com.cerverae18.superlistfinal.logic.entities.List> = repository.listById(id).asLiveData()
+
     fun insert(list: com.cerverae18.superlistfinal.logic.entities.List)= viewModelScope.launch {
         repository.insert(list)
     }
 
-//    fun getById(id: String): List = viewModelScope.launch {
-//        return repository.getById(id)
-//    }
+
 
     fun delete(list: com.cerverae18.superlistfinal.logic.entities.List) = viewModelScope.launch {
         repository.delete(list)

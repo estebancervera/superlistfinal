@@ -4,6 +4,7 @@ package com.cerverae18.superlistfinal
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.InputFilter
 import android.util.Log
 import android.view.*
 import com.cerverae18.superlistfinal.databinding.ActivityNewListBinding
@@ -38,15 +39,15 @@ class NewListActivity : AppCompatActivity() {
     private lateinit var lists : List<com.cerverae18.superlistfinal.logic.entities.List>
 
 
-    val productViewModel: ProductViewModel by viewModels {
+    private val productViewModel: ProductViewModel by viewModels {
         ProductViewModelFactory((application as GeneralApplication).productRepository)
     }
 
-    val listViewModel: ListViewModel by viewModels {
+    private val listViewModel: ListViewModel by viewModels {
         ListViewModelFactory((application as GeneralApplication).listRepository)
     }
 
-    val productListViewModel: ProductListViewModel by viewModels {
+    private val productListViewModel: ProductListViewModel by viewModels {
         ProductListViewModelFactory((application as GeneralApplication).productListRepository)
     }
 
@@ -61,6 +62,8 @@ class NewListActivity : AppCompatActivity() {
         this.supportActionBar?.title = getString(R.string.new_list_title)
 
         listNameEditText = binding.listNameEditText
+
+        listNameEditText.filters = arrayOf(InputFilter.LengthFilter(30))
 
         productsAddedToList  = hashMapOf()
 
