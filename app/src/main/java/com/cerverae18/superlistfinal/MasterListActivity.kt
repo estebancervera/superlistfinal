@@ -33,7 +33,7 @@ class MasterListActivity : AppCompatActivity() {
     //AlertDialog used to add a new product to the master list
     lateinit var dialog: AlertDialog
     lateinit var dialogBuilder: AlertDialog.Builder
-    private lateinit var sortingSwitch: Switch
+    private  var sortingSwitch: Switch? = null
 
     private var categories = listOf<Category>()
     private lateinit var productsWithCategory: List<ProductWithCategory>
@@ -67,6 +67,8 @@ class MasterListActivity : AppCompatActivity() {
             this.productsWithCategory = products
             updateOnChecked()
         })
+
+
 
         categoryViewModel.allCategories.observe(this, { categories ->
               this.categories = categories
@@ -183,15 +185,19 @@ class MasterListActivity : AppCompatActivity() {
 
         sortingSwitch = menu.findItem(R.id.sorting_switch).actionView.findViewById(R.id.layout_switch) as Switch
 
-        sortingSwitch.setOnCheckedChangeListener { _, state ->
+        sortingSwitch!!.setOnCheckedChangeListener { _, state ->
             updateOnChecked()
         }
         return super.onCreateOptionsMenu(menu)
     }
 
     private fun updateOnChecked(){
+        if (sortingSwitch == null){
+            sortingSwitch = Switch(this)
+        }
+
         removeAllFragments()
-        if (sortingSwitch.isChecked) {
+        if (sortingSwitch!!.isChecked) {
             setFragmentsByCategory()
         } else {
             setFragmentsByAlphabeticalOrder()
