@@ -19,7 +19,7 @@
         <com.cerverae18.superlistfinal.SquareButton
 
             android:id="@+id/btn_delete"
-            android:layout_width="40dp"
+            android:layout_width="30dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -49,22 +49,9 @@
             android:maxLines="1"
             android:text="@string/new_list_product_cell_default_item_name"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/master_list_product_name2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="@string/separator"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/master_list_product_category"
-            app:layout_constraintStart_toEndOf="@+id/master_list_product_name"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -76,7 +63,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@string/product_category"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_delete"
             app:layout_constraintTop_toTopOf="parent" />
