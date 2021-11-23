@@ -61,9 +61,11 @@ class NewListProductCellFragment : Fragment() {
         }
 
         binding.btnIncrease.setOnClickListener {
-            quantity += 1
-            product?.let { product -> productsAdded?.put(product, quantity) }
-            binding.newListProductCellQtyText.text = "$quantity"
+            if(quantity < 99){
+                quantity += 1
+                product?.let { product -> productsAdded?.put(product, quantity) }
+                binding.newListProductCellQtyText.text = "$quantity"
+            }
         }
 
         return binding.root

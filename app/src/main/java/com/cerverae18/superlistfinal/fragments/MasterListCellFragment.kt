@@ -13,6 +13,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import com.cerverae18.superlistfinal.GeneralApplication
 import com.cerverae18.superlistfinal.MasterListActivity
+import com.cerverae18.superlistfinal.R
 import com.cerverae18.superlistfinal.databinding.FragmentMasterListCellBinding
 import com.cerverae18.superlistfinal.logic.ProductViewModel
 import com.cerverae18.superlistfinal.logic.ProductViewModelFactory
@@ -56,10 +57,10 @@ class MasterListCellFragment : Fragment() {
 
 
         dialogBuilder = AlertDialog.Builder(requireActivity())
-        dialogBuilder.setTitle("Delete Product")
-        dialogBuilder.setMessage("Are you sure you want to delete this the product: ${product?.name}?")
+        dialogBuilder.setTitle(getString(R.string.delete_product))
+        dialogBuilder.setMessage(getString(R.string.delete_product_message) + " ${product?.name}?")
 
-        dialogBuilder.setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, _ ->
+        dialogBuilder.setPositiveButton(getString(R.string.yes), DialogInterface.OnClickListener { dialog, _ ->
 
 
             val activity =  activity as MasterListActivity
@@ -70,17 +71,13 @@ class MasterListCellFragment : Fragment() {
             dialog.dismiss()
         })
 
-        dialogBuilder.setNegativeButton("No", DialogInterface.OnClickListener { dialog, _ ->
-            // what ever you want to do with No option.
+        dialogBuilder.setNegativeButton(getString(R.string.cancel), DialogInterface.OnClickListener { dialog, _ ->
+
             dialog.dismiss()
         })
 
         binding.btnDelete.setOnClickListener {
-            //getActivity().getFragmentManager().beginTransaction().remove(this).commit();
-
-            Log.i("DARA", "Click Delete")
             dialogBuilder.show()
-
         }
 
         return binding.root
