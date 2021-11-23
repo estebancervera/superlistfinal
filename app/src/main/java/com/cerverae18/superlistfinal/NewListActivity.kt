@@ -19,7 +19,18 @@ import com.cerverae18.superlistfinal.logic.entities.ProductListCrossRef
 import java.text.SimpleDateFormat
 import java.util.*
 
-
+/**
+ * An Activity to add a new List
+ *
+ * This class creates an Activity for the User to create a new List
+ *  by giving it a name, date and selecting products and quantities assign to that list.
+ *
+ *
+ * @property binding the reference to the UI components in the layout associated to the Activity.
+ * @property listDate the date selected by the User to assign to the created List
+ * @property listNameEditText the EditText
+ * @constructor Creates creates a Blank Activity
+ */
 class NewListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityNewListBinding
@@ -101,7 +112,7 @@ class NewListActivity : AppCompatActivity() {
              for ((product, qty) in productsAddedToList) {
 
                 val productList = ProductListCrossRef(product.productId, qty, uuid)
-
+                // This inserts the a productList object to the database
                 productListViewModel.insert(productList)
                 }
 
@@ -140,7 +151,11 @@ class NewListActivity : AppCompatActivity() {
         dialog.show()
     }
 
-
+    /**
+     *  This method removes the Focus out of an EditText instance
+     *  @param editText represents the EditText that will loose focus
+     *
+     */
     private fun removeFocusEditText(editText : EditText){
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(editText.windowToken, 0)
