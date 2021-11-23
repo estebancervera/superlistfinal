@@ -15,6 +15,7 @@
         android:ems="10"
         android:hint="@string/new_list_product_cell_default_item_name"
         android:inputType="textPersonName"
+        android:maxLength="@integer/max_length_product_name"
         android:minHeight="48dp" />
 
     <Button

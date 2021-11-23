@@ -39,15 +39,15 @@ class NewListActivity : AppCompatActivity() {
     private lateinit var lists : List<com.cerverae18.superlistfinal.logic.entities.List>
 
 
-    val productViewModel: ProductViewModel by viewModels {
+    private val productViewModel: ProductViewModel by viewModels {
         ProductViewModelFactory((application as GeneralApplication).productRepository)
     }
 
-    val listViewModel: ListViewModel by viewModels {
+    private val listViewModel: ListViewModel by viewModels {
         ListViewModelFactory((application as GeneralApplication).listRepository)
     }
 
-    val productListViewModel: ProductListViewModel by viewModels {
+    private val productListViewModel: ProductListViewModel by viewModels {
         ProductListViewModelFactory((application as GeneralApplication).productListRepository)
     }
 
