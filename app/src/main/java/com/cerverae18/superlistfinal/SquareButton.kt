@@ -5,6 +5,13 @@ import android.util.AttributeSet
 import android.widget.LinearLayout
 
 
+/**
+ * A Custom LinearLayout Class to create a Square Button
+ * This is a class that extends from the LinearLayout to create a Perfectly Square Button
+*  @constructor receives the context and passes it to LinearLayout
+ *  @constructor receives the context  and attributes and passes it to LinearLayout
+ */
+
 class SquareButton : LinearLayout {
     constructor(context: Context?) : super(context) {}
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {}
