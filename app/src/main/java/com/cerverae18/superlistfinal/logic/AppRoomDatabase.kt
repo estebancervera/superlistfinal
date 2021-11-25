@@ -12,7 +12,7 @@ import com.cerverae18.superlistfinal.logic.entities.ProductListCrossRef
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = [Product::class, List::class, ProductListCrossRef::class, Category::class], version = 7)
+@Database(entities = [Product::class, List::class, ProductListCrossRef::class, Category::class], version = 8)
 abstract class AppRoomDatabase : RoomDatabase() {
 
     abstract fun productDao(): ProductDao

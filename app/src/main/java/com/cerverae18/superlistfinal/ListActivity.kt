@@ -11,6 +11,7 @@ import com.cerverae18.superlistfinal.databinding.ActivityListBinding
 import com.cerverae18.superlistfinal.fragments.ListProductCellFragment
 import com.cerverae18.superlistfinal.logic.*
 import com.cerverae18.superlistfinal.logic.entities.relations.ListWithProducts
+import java.text.SimpleDateFormat
 
 
 class ListActivity : AppCompatActivity() {
@@ -44,7 +45,9 @@ class ListActivity : AppCompatActivity() {
         Log.i("EACS", "$listId")
         if (listId != null) {
             listViewModel.getListById(listId).observe(this, { list ->
-                this.supportActionBar?.title = list.name
+                val sdf = SimpleDateFormat("dd/MM/yy")
+               // this.supportActionBar?.title = "${sdf.format(list.date)}\n${list.name}"
+                this.supportActionBar?.title = "${list.name}"
             })
 
             productListViewModel.productsFromList(listId).observe(this, { products ->
