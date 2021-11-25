@@ -62,10 +62,29 @@ abstract class AppRoomDatabase : RoomDatabase() {
 
             suspend fun populateDatabase(categoryDao: CategoryDao) {
                 categoryDao.deleteAll()
-                categoryDao.insert(Category("Diary"))
-                categoryDao.insert(Category("Cereals"))
+                categoryDao.insert(Category("Baby"))
+                categoryDao.insert(Category("Beer, Wine & Spirits"))
                 categoryDao.insert(Category("Beverages"))
-                categoryDao.insert(Category("Proteins"))
+                categoryDao.insert(Category("Bread & Bakery"))
+                categoryDao.insert(Category("Breakfast & Cereal"))
+                categoryDao.insert(Category("Canned Goods & Soups"))
+                categoryDao.insert(Category("Condiments/Spices & Bake"))
+                categoryDao.insert(Category("Cookies, Snacks & Candy"))
+                categoryDao.insert(Category("Dairy, Eggs & Cheese"))
+                categoryDao.insert(Category("Deli & Signature Cafe"))
+                categoryDao.insert(Category("Flowers"))
+                categoryDao.insert(Category("Frozen Foods"))
+                categoryDao.insert(Category("Fruits & Vegetables"))
+                categoryDao.insert(Category("Grains, Pasta & Sides"))
+                categoryDao.insert(Category("International Cuisine"))
+                categoryDao.insert(Category("Meat & Seafood"))
+                categoryDao.insert(Category("Miscellaneous"))
+                categoryDao.insert(Category("Paper Products"))
+                categoryDao.insert(Category("Cleaning Supplies"))
+                categoryDao.insert(Category("Health & Beauty"))
+                categoryDao.insert(Category("Pet Care"))
+                categoryDao.insert(Category("Pharmacy"))
+                categoryDao.insert(Category("Tobacco"))
             }
         }
     }

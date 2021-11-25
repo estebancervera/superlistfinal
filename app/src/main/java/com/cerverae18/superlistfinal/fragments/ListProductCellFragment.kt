@@ -78,7 +78,7 @@ class ListProductCellFragment : Fragment() {
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @param list List
+         * @param product is an instance of the ListWithProducts class
          * @return A new instance of fragment MainActivityListCellFragment.
          */
 
