@@ -6,6 +6,16 @@ import androidx.room.PrimaryKey
 import java.io.Serializable
 import java.util.*
 
+/**
+ *  Data class representing a correlation between products and lists as a table
+ *
+ *  @param productId number used to identify the specified product
+ *  @param quantity amount of entities desired of specific product
+ *  @param listId String used to identify specified list
+ *  @param checked boolean used to determine whether a product has been checked on the list or not
+ *  @param id String used to represent this correlation
+ */
+
 @Entity(primaryKeys = ["productId", "listId"], tableName = "Product_List")
 data class ProductListCrossRef(
     val productId: Int,
