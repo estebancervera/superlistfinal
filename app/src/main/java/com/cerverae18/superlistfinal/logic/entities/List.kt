@@ -7,6 +7,14 @@ import java.io.Serializable
 import java.sql.Date
 import java.util.*
 
+/**
+ *  Data class representing a List
+ *
+ *  @param listId String used to identify the list
+ *  @param name name of the list
+ *  @param date date in which the list is intended to be used
+ */
+
 @Entity
  data class List(
  @PrimaryKey(autoGenerate = false) val listId: String,
