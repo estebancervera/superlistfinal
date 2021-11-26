@@ -194,7 +194,7 @@ class MasterListActivity : AppCompatActivity() {
             .setTitle(getString(title))
             .setMessage(getString(message))
             .setNegativeButton(R.string.cancel) { view, _ ->
-                //Toast.makeText(this, "Cancel button pressed", Toast.LENGTH_SHORT).show()
+
                 view.dismiss()
             }
             .setCancelable(false)

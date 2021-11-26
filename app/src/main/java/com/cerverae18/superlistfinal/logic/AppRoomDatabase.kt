@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
  * including entities.
  *
  */
-@Database(entities = [Product::class, List::class, ProductListCrossRef::class, Category::class], version = 8)
+@Database(entities = [Product::class, List::class, ProductListCrossRef::class, Category::class], version = 9)
 abstract class AppRoomDatabase : RoomDatabase() {
 
 
