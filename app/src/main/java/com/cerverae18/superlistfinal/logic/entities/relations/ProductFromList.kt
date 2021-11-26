@@ -20,7 +20,7 @@ import javax.security.auth.Subject
  *  @param checked boolean used to determine whether a product has been checked on the list or not
  */
 
-data class ListWithProducts (
+data class ProductFromList (
     @ColumnInfo(name = "id") val id: String,
     @ColumnInfo(name = "productName") val name: String,
     @ColumnInfo(name = "quantity") val quantity: Int,

@@ -8,9 +8,7 @@ import androidx.fragment.app.Fragment
 import com.cerverae18.superlistfinal.ListActivity
 import com.cerverae18.superlistfinal.R
 import com.cerverae18.superlistfinal.databinding.FragmentListProductCellBinding
-import com.cerverae18.superlistfinal.logic.entities.Product
-import com.cerverae18.superlistfinal.logic.entities.relations.ListWithProducts
-import com.cerverae18.superlistfinal.logic.entities.relations.ProductWithCategory
+import com.cerverae18.superlistfinal.logic.entities.relations.ProductFromList
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PRODUCTS_LIST = "ARG_PRODUCTS_LIST"
@@ -22,7 +20,7 @@ private const val ARG_PRODUCTS_LIST = "ARG_PRODUCTS_LIST"
  */
 class ListProductCellFragment : Fragment() {
 
-    private var product: ListWithProducts? = null
+    private var product: ProductFromList? = null
 
     private var _binding: FragmentListProductCellBinding? = null
     private val binding get() = _binding!!
@@ -31,11 +29,19 @@ class ListProductCellFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            product = it.getSerializable(ARG_PRODUCTS_LIST) as ListWithProducts
+            product = it.getSerializable(ARG_PRODUCTS_LIST) as ProductFromList
 
         }
     }
 
+    /**
+     *  This method instantiates a fragment.
+     *
+     *  @param inflater LayoutInflater object that can be used to inflate any views in the fragment
+     *  @param container parent view that the fragment's UI should be attached to.
+     *  @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved
+     *                            state as given here
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -96,7 +102,7 @@ class ListProductCellFragment : Fragment() {
          */
 
         @JvmStatic
-        fun newInstance(product: ListWithProducts) =
+        fun newInstance(product: ProductFromList) =
             ListProductCellFragment().apply {
                 arguments = Bundle().apply {
                     putSerializable(ARG_PRODUCTS_LIST, product)
