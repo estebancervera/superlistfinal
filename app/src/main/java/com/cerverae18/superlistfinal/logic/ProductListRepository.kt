@@ -1,10 +1,8 @@
 package com.cerverae18.superlistfinal.logic
 
 import androidx.annotation.WorkerThread
-import com.cerverae18.superlistfinal.logic.entities.Product
 import com.cerverae18.superlistfinal.logic.entities.ProductListCrossRef
-import com.cerverae18.superlistfinal.logic.entities.relations.ListWithProducts
-import com.cerverae18.superlistfinal.logic.entities.relations.ProductWithCategory
+import com.cerverae18.superlistfinal.logic.entities.relations.ProductFromList
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -23,7 +21,7 @@ class ProductListRepository(private val productListDao: ProductListDao) {
      *  @param id is an String representing the listId of the ProductListCrossRefs to be fetch to the database via the Dao's query
      *  @returns a Flow of lists of ListWithProducts
      */
-    fun getProductsFromList(id: String): Flow<List<ListWithProducts>> = productListDao.getAllFromList(id)
+    fun getProductsFromList(id: String): Flow<List<ProductFromList>> = productListDao.getAllFromList(id)
 
     /**
      *  This a suspend method that calls the Dao's query update function and explicitly states that it should only

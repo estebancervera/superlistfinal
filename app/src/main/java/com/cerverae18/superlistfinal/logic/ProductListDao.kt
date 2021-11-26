@@ -5,8 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.cerverae18.superlistfinal.logic.entities.ProductListCrossRef
-import com.cerverae18.superlistfinal.logic.entities.relations.ListWithProducts
-import com.cerverae18.superlistfinal.logic.entities.relations.ProductWithCategory
+import com.cerverae18.superlistfinal.logic.entities.relations.ProductFromList
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -24,7 +23,7 @@ interface ProductListDao {
      *  @returns a FLOW list of ListWithProducts
      */
     @Query("SELECT id,  product.name as productName, quantity, category.name as categoryName, checked FROM product_list  INNER JOIN product ON product_list.productId = product.productId INNER JOIN category ON product.category = category.categoryId WHERE listId = :id")
-    fun getAllFromList(id: String): Flow<List<ListWithProducts>>
+    fun getAllFromList(id: String): Flow<List<ProductFromList>>
 
     /**
      *  This is an abstract method to be implemented in the repository with a query update a ProductListCrossRef's checked value

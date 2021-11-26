@@ -1,10 +1,8 @@
 package com.cerverae18.superlistfinal.logic
 
 import androidx.lifecycle.*
-import com.cerverae18.superlistfinal.logic.entities.Product
 import com.cerverae18.superlistfinal.logic.entities.ProductListCrossRef
-import com.cerverae18.superlistfinal.logic.entities.relations.ListWithProducts
-import com.cerverae18.superlistfinal.logic.entities.relations.ProductWithCategory
+import com.cerverae18.superlistfinal.logic.entities.relations.ProductFromList
 import kotlinx.coroutines.launch
 
 /**
@@ -24,7 +22,7 @@ class ProductListViewModel(private val repository: ProductListRepository): ViewM
      *  @param id is a String representing the listId from a list in the database
      *  @return a LiveData of a list of ListWithProducts
      */
-    fun productsFromList(id: String): LiveData<List<ListWithProducts>> = repository.getProductsFromList(id).asLiveData()
+    fun productsFromList(id: String): LiveData<List<ProductFromList>> = repository.getProductsFromList(id).asLiveData()
 
     /**
      *  This method calls the repository update function in a new coroutine
