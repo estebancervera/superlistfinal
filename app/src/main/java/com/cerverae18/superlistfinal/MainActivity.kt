@@ -22,7 +22,16 @@ import com.cerverae18.superlistfinal.logic.ListViewModelFactory
 import java.text.SimpleDateFormat
 import java.util.*
 
-
+/**
+ * An Activity to display the date list
+ *
+ * This class creates an Activity for the User to view all their existing lists, add new ones, 
+ * access the master list, and set the app theme.
+ *
+ * @property binding the reference to the UI components in the layout associated to the Activity.
+ * @property listViewModel ViewModel that allows async operations to the database involving List
+ * 
+ */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -38,11 +47,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-       // this.supportActionBar?.setDisplayShowTitleEnabled(false)
-
+        // Set the title of the Activity
         this.supportActionBar?.title = getString(R.string.lists_title)
 
+        // Populate the products list with the database data
         listViewModel.allLists.observe(this, { lists ->
+            // Set the fragments to display the list of lists
             setupListFrags(lists)
 
         })
@@ -58,6 +68,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * Sets up the list of lists to be displayed in the UI
+     *
+     * @param lists the list of lists to be displayed in the UI
+     */
     private fun setupListFrags(lists : kotlin.collections.List<List>){
         for (fragment in supportFragmentManager.fragments) {
             supportFragmentManager.beginTransaction().remove(fragment).commit()
@@ -68,6 +83,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    
+    /**
+     * Initialize the contents of the Activity's standard options menu.
+     * @param menu The options menu in which you place your items.
+     * @return You must return true for the menu to be displayed; if you return false it will not be shown.
+     */
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         menu?.findItem(R.id.master_list)?.setActionView(R.layout.master_item)
@@ -88,7 +109,6 @@ class MainActivity : AppCompatActivity() {
      *  This method shows a PopupWindows with a calendar picker, and buttons for the user to select a date
      *  @param view is the view that will present the PopupWindow
      */
-
     private fun showThemePopUpView(){
         val inflater = layoutInflater
         //inflates the new_list_select_date_popup.xml layout
@@ -103,7 +123,11 @@ class MainActivity : AppCompatActivity() {
 
         val radioGroup = popupView.findViewById<RadioGroup>(R.id.radio_group_themes)
 
-         fun getSelectedThemeRadio(): Int{
+        /**
+        * This is used to get the selected theme from the radio group stored in the shared preferences
+        * @return the resource id of the radio button corresponding to the selected theme
+        */
+        fun getSelectedThemeRadio(): Int{
             when(getSharedPreferences(EXTRA.THEME, Context.MODE_PRIVATE).getInt(EXTRA.THEME_NAME, 1)){
                 1 -> {return R.id.rb_1}
                 2 -> {return R.id.rb_2}
@@ -111,12 +135,12 @@ class MainActivity : AppCompatActivity() {
                 4 -> {return R.id.rb_4}
                 5 -> {return R.id.rb_5}
             }
-             return R.id.rb_1
+            return R.id.rb_1
         }
 
         radioGroup.check(getSelectedThemeRadio())
 
-
+        // Set a click listener for the theme radioGroup buttons
         radioGroup.setOnCheckedChangeListener { _, id ->
             popupWindow.dismiss()
             when(id){
@@ -148,7 +172,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
+    /**
+    *  This method either start a MasterListActivity or a popupWindow with a radioGroup to select an app visual theme.
+    *  @param item The menu item that was selected. This value cannot be null.
+    *  @return boolean Return false to allow normal menu processing to proceed, true to consume it here.
+    */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.master_list -> {

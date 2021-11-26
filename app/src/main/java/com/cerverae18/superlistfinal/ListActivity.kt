@@ -62,6 +62,7 @@ class ListActivity : AppCompatActivity() {
             listViewModel.getListById(listId).observe(this, { list ->
               if ( list != null)  {
                   val sdf = SimpleDateFormat("dd/MM/yy")
+                  // Set the list name and date as the title and subtitle of the Activity
                   this.supportActionBar?.subtitle = sdf.format(list.date)
                   this.supportActionBar?.title = list.name
               }
@@ -75,6 +76,7 @@ class ListActivity : AppCompatActivity() {
             })
         }
 
+        // Click listener for the delete list button
         binding.listActivityBtnDeleteList.setOnClickListener {
             if (listId != null) {
                 createDeleteDialog(listId)
@@ -126,6 +128,11 @@ class ListActivity : AppCompatActivity() {
     }
 
 
+
+    /**
+     *  This method creates an [AlertDialog] to confirm the deletion of the list.
+     *  @param listId the id of the list to be deleted.
+     */
     private fun createDeleteDialog(listId: String){
         val dialogBuilder = AlertDialog.Builder(this)
         dialogBuilder
@@ -147,6 +154,8 @@ class ListActivity : AppCompatActivity() {
 
     /**
      * Initialize the contents of the Activity's standard options menu.
+     * @param menu The options menu in which you place your items.
+     * @return You must return true for the menu to be displayed; if you return false it will not be shown.
      */
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_list, menu)

@@ -19,17 +19,20 @@ import kotlin.random.Random
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_LIST = "ARG_LIST"
 
-
-
 /**
  * A simple [Fragment] subclass.
  * Use the [MainActivityListCellFragment.newInstance] factory method to
  * create an instance of this fragment.
+ * @property list the list to be displayed
+ * @property _binding is a FragmentMainActivityListCellBinding? that helps with the accessing of UI elements inside the onCreateView method
+ * @property binding is a FragmentMainActivityListCellBinding getter referencing to _binding.
  */
 class MainActivityListCellFragment : Fragment() {
-
+    
+    // list to be displayed
     private var list: List? = null
 
+    // Fragment binding
     private var _binding: FragmentMainActivityListCellBinding? = null
     private val binding get() = _binding!!
 
@@ -43,6 +46,14 @@ class MainActivityListCellFragment : Fragment() {
         }
     }
 
+    /**
+     *  This method instantiates a fragment.
+     *
+     *  @param inflater LayoutInflater object that can be used to inflate any views in the fragment
+     *  @param container parent view that the fragment's UI should be attached to.
+     *  @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved
+     *                            state as given here
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,16 +66,19 @@ class MainActivityListCellFragment : Fragment() {
         _binding = FragmentMainActivityListCellBinding.inflate(inflater, container, false)
 
 
-        // color = Color.rgb(Random.nextInt(120, 255), Random.nextInt(120, 255), Random.nextInt(120, 255))
+        // Set CardView background theme color
         binding.mainActivityListCellCardview.setCardBackgroundColor(typedValue.data)
         val sdf = SimpleDateFormat("dd/MM/yyyy")
 
+        // Store Views
         val listNameText = binding.mainActivityListCellName
         val listDateText = binding.mainActivityListCellDate
-        //listNameText.setTextColor(Color.WHITE)
+        
+        // Set the text of the list name and date
         listNameText.text = list?.name
         listDateText.text = sdf.format(list?.date?.let { Date(it) })
-        //listDateText.setTextColor(Color.WHITE)
+
+        // List Cardview click listener
         binding.mainActivityListCellCardview.setOnClickListener {
             Intent(activity, ListActivity::class.java).also {
                 it.putExtra(EXTRA.EXTRA_LIST_ID, list?.listId)
@@ -75,6 +89,9 @@ class MainActivityListCellFragment : Fragment() {
         return binding.root
     }
 
+    /**
+    * Initialize the contents of the Activity's standard options menu.
+    */
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 
         
