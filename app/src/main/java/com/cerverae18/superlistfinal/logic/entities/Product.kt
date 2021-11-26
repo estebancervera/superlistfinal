@@ -5,6 +5,13 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.io.Serializable
 
+/**
+ *  Data class representing a product
+ *
+ *  @param name name of the product
+ *  @param categoryId product's category id
+ *  @property productId  number used to identify the product
+ */
 
 @Entity
  data class Product(

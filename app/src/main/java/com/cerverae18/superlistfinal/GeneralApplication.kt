@@ -14,4 +14,5 @@ class GeneralApplication: Application() {
     val categoryRepository by lazy { CategoryRepository(database.categoryDao()) }
     val listRepository by lazy { ListRepository(database.listDao()) }
     val productListRepository by lazy { ProductListRepository(database.productListDao()) }
+
 }

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/cardview_light_background"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/select_theme_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/select_theme"
+        android:textSize="20sp"
+        android:layout_marginBottom="10sp"/>
+
+    <RadioGroup
+        android:id="@+id/radio_group_themes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/select_theme_text">
+
+        <RadioButton
+            android:id="@+id/rb_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/blue_theme" />
+
+        <RadioButton
+            android:id="@+id/rb_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/pink_theme" />
+
+        <RadioButton
+            android:id="@+id/rb_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/gray_theme" />
+
+        <RadioButton
+            android:id="@+id/rb_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/red_theme" />
+
+        <RadioButton
+            android:id="@+id/rb_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/purple_theme" />
+
+    </RadioGroup>
+
+</RelativeLayout>

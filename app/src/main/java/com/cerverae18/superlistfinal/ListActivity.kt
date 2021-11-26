@@ -1,5 +1,6 @@
 package com.cerverae18.superlistfinal
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,7 @@ import com.cerverae18.superlistfinal.databinding.ActivityListBinding
 import com.cerverae18.superlistfinal.fragments.ListProductCellFragment
 import com.cerverae18.superlistfinal.logic.*
 import com.cerverae18.superlistfinal.logic.entities.relations.ListWithProducts
+import java.text.SimpleDateFormat
 
 
 class ListActivity : AppCompatActivity() {
@@ -30,6 +32,7 @@ class ListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(EXTRA.getThemeColor(this))
         binding = ActivityListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -44,6 +47,8 @@ class ListActivity : AppCompatActivity() {
         Log.i("EACS", "$listId")
         if (listId != null) {
             listViewModel.getListById(listId).observe(this, { list ->
+                val sdf = SimpleDateFormat("dd/MM/yy")
+                this.supportActionBar?.subtitle = sdf.format(list.date)
                 this.supportActionBar?.title = list.name
             })
 
@@ -94,6 +99,9 @@ class ListActivity : AppCompatActivity() {
         }
         return super.onCreateOptionsMenu(menu)
     }
+
+
+
 
     private fun updateOnChecked(){
 

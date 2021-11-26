@@ -62,6 +62,7 @@ class NewListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(EXTRA.getThemeColor(this))
         binding = ActivityNewListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         // Sets up the back arrow for the user and runs the code on onSupportNavigateUp()

@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -49,9 +50,24 @@ class MasterListCellFragment : Fragment() {
         }
     }
 
+    /**
+     *  This method renders a fragment's view.
+     *
+     *  @param inflater LayoutInflater object that can be used to inflate any views in the fragment
+     *  @param parent parent view that the fragment's UI should be attached to.
+     *  @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved
+     *                            state as given here
+     */
+
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        //gets color from theme
+        val typedValue = TypedValue()
+        context?.theme?.resolveAttribute(R.attr.colorSecondaryVariant,typedValue,true)
         // Inflate the layout for this fragment
         _binding = FragmentMasterListCellBinding.inflate(inflater, parent, false)
+
+        binding.masterListCardview.setCardBackgroundColor(typedValue.data)
         binding.masterListProductName.text = "${product?.name}"
         binding.masterListProductCategory.text = "${product?.category}"
 

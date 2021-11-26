@@ -33,7 +33,12 @@
     <string name="lists_title">LISTS</string>
     <string name="new_list_title">ADD NEW LIST</string>
     <string name="master_list_title">PRODUCTS</string>
-
+    <string name="select_theme">Select Theme</string>
+    <string name="blue_theme">Blue Theme</string>
+    <string name="pink_theme">Pink Theme</string>
+    <string name="gray_theme">Gray Theme</string>
+    <string name="red_theme">Red Theme</string>
+    <string name="purple_theme">Purple Theme</string>
 
 
 </resources>
