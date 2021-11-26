@@ -21,7 +21,7 @@ class EXTRA {
                 com.cerverae18.superlistfinal.logic.EXTRA.THEME_NAME, 1)){
                 1 -> { return R.style.Theme_Superlistfinal }
                 2 -> { return R.style.PinkTheme }
-                3 -> { return R.style.PinkTheme }
+                3 -> { return R.style.GrayTheme }
                 4 -> { return R.style.PinkTheme }
                 5 -> { return R.style.PinkTheme }
             }

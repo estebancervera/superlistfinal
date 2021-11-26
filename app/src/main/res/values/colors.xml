@@ -19,4 +19,10 @@
     <color name="very_light_purple_pink">#FFFFC1FF</color>
     <color name="dark_pink_red">#FFD92B42</color>
 
+    <color name="dark_gray">#FF3D3D3D</color>
+    <color name="darker_gray">#FF2A2929</color>
+    <color name="gray">#FF606060</color>
+    <color name="lighter_gray">#FF858585</color>
+
+
 </resources>

@@ -36,7 +36,7 @@
             android:id="@+id/rb_3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:text="@string/gray_theme" />
 
         <RadioButton
             android:id="@+id/rb_4"
