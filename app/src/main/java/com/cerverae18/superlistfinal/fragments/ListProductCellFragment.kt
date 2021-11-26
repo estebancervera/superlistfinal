@@ -18,8 +18,8 @@ private const val ARG_PRODUCT_FROM_LIST = "ARG_PRODUCT_FROM_LIST"
  * Use the [NewListProductCellFragment.newInstance] factory method to
  * create an instance of this fragment.
  * @property product is the product contained in a supermarket visit list
- * @property _binding is a FragmentNewListProductCellBinding? that helps with the accessing of UI elements inside the onCreateView method
- * @property binding is a FragmentNewListProductCellBinding getter referencing to _binding.
+ * @property _binding is a FragmentListProductCellBinding? that helps with the accessing of UI elements inside the onCreateView method
+ * @property binding is a FragmentListProductCellBinding getter referencing to _binding.
  */
 class ListProductCellFragment : Fragment() {
 
