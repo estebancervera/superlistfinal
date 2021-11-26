@@ -42,14 +42,14 @@
 
         <TextView
             android:id="@+id/master_list_product_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
 
             android:layout_marginStart="16dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@string/new_list_product_cell_default_item_name"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -57,16 +57,19 @@
 
         <TextView
             android:id="@+id/master_list_product_category"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
 
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
             android:ellipsize="end"
+            android:gravity="right"
             android:maxLines="1"
             android:text="@string/product_category"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_delete"
+            app:layout_constraintStart_toEndOf="@+id/master_list_product_name"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
