@@ -42,13 +42,13 @@
             android:id="@+id/rb_4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:text="@string/red_theme" />
 
         <RadioButton
             android:id="@+id/rb_5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:text="@string/purple_theme" />
 
     </RadioGroup>
 

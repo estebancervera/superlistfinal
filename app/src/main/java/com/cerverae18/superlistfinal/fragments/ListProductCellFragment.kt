@@ -1,5 +1,6 @@
 package com.cerverae18.superlistfinal.fragments
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.*
@@ -40,8 +41,10 @@ class ListProductCellFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        val typedValue = TypedValue()
-        context?.theme?.resolveAttribute(R.attr.colorSecondaryVariant,typedValue,true)
+        val secondaryVariantType = TypedValue()
+        val accentype = TypedValue()
+        context?.theme?.resolveAttribute(R.attr.colorSecondaryVariant,secondaryVariantType,true)
+        context?.theme?.resolveAttribute(R.attr.colorAccent,accentype,true)
         // Inflate the layout for this fragment
         _binding = FragmentListProductCellBinding.inflate(inflater, container, false)
 
@@ -52,9 +55,15 @@ class ListProductCellFragment : Fragment() {
         val productQuantity = binding.listProductQuantity
         val productCheckBox = binding.productCheckBox
 
+
+
         productCheckBox.isChecked = product?.checked ?: false
 
-        val color = if (!productCheckBox.isChecked) typedValue.data else resources.getColor(R.color.light_gray)
+        val color = if (!productCheckBox.isChecked) secondaryVariantType.data else accentype.data
+
+        val colorContrast = if (productCheckBox.isChecked) secondaryVariantType.data else accentype.data
+
+        productCheckBox.setButtonTintList(ColorStateList.valueOf(colorContrast))
 
         binding.listActivityListCellCardview.setCardBackgroundColor(color)
 

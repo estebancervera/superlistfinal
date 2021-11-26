@@ -19,10 +19,28 @@
     <color name="very_light_purple_pink">#FFFFC1FF</color>
     <color name="dark_pink_red">#FFD92B42</color>
 
-    <color name="dark_gray">#FF3D3D3D</color>
-    <color name="darker_gray">#FF2A2929</color>
+    <color name="dark_gray">#FF2A2929</color>
+    <color name="darker_gray">#FF262525</color>
     <color name="gray">#FF606060</color>
-    <color name="lighter_gray">#FF858585</color>
+    <color name="lighter_gray">#FFE0DEDE</color>
+
+    <color name="red">#FFE52424</color>
+    <color name="light_red_orange">#FFFF9C80</color>
+    <color name="blue_light_teal">#FFFF8E4D</color>
+    <color name="darker_red">#FF9B1616</color>
+
+    <color name="vibrant_purple">#FFAE00AE</color>
+    <color name="purple_pastel">#FFB485B0</color>
+    <color name="pastel_blue_teal">#FFE10080</color>
+    <color name="dark_purple">#FF7A0F7A</color>
+
+    <color name="red_pastel">#FFFF5858</color>
+    <color name="blue_strong">#FF00659F</color>
+    <color name="blueis_gray">#FF798897</color>
+    <color name="pink_strong">#FFF14483</color>
+    <color name="purple_strong">#FF8F59C3</color>
+
+
 
 
 </resources>
