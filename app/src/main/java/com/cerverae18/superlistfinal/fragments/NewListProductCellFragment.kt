@@ -1,10 +1,12 @@
 package com.cerverae18.superlistfinal.fragments
 
 import android.os.Bundle
+import android.util.TypedValue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.cerverae18.superlistfinal.R
 import com.cerverae18.superlistfinal.databinding.FragmentNewListProductCellBinding
 import com.cerverae18.superlistfinal.logic.entities.Product
 
@@ -42,9 +44,15 @@ class NewListProductCellFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        //gets color from theme
+        val typedValue = TypedValue()
+        context?.theme?.resolveAttribute(R.attr.colorSecondaryVariant,typedValue,true)
+
         // Inflate the layout for this fragment
         _binding = FragmentNewListProductCellBinding.inflate(inflater, container, false)
 
+        binding.newListCardview.setCardBackgroundColor(typedValue.data)
         binding.newListProductCellNameText.text = product?.name
 
         binding.btnDecrease.setOnClickListener {

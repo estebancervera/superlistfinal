@@ -3,6 +3,7 @@ package com.cerverae18.superlistfinal.fragments
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.*
 import androidx.fragment.app.Fragment
 import com.cerverae18.superlistfinal.ListActivity
@@ -35,6 +36,7 @@ class MainActivityListCellFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let {
             list = it.getSerializable(ARG_LIST) as List
 
@@ -45,11 +47,16 @@ class MainActivityListCellFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        //get color from Theme
+        val typedValue = TypedValue()
+        context?.theme?.resolveAttribute(R.attr.colorSecondaryVariant,typedValue,true)
+
         // Inflate the layout for this fragment
         _binding = FragmentMainActivityListCellBinding.inflate(inflater, container, false)
 
+
         // color = Color.rgb(Random.nextInt(120, 255), Random.nextInt(120, 255), Random.nextInt(120, 255))
-        binding.mainActivityListCellCardview.setCardBackgroundColor(resources.getColor(R.color.lightpurple))
+        binding.mainActivityListCellCardview.setCardBackgroundColor(typedValue.data)
         val sdf = SimpleDateFormat("dd/MM/yyyy")
 
         val listNameText = binding.mainActivityListCellName

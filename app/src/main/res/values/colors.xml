@@ -12,4 +12,11 @@
     <color name="blue">#FF3071E7</color>
     <color name="lightpurple">#FFA6B2EC</color>
     <color name="light_gray">#FF9D9D9D</color>
+
+    <color name="pink_red">#FFFF525E</color>
+    <color name="light_pink">#FFFF7398</color>
+    <color name="pink_light_purple">#FFF4ABC4</color>
+    <color name="very_light_purple_pink">#FFFFC1FF</color>
+    <color name="dark_pink_red">#FFD92B42</color>
+
 </resources>

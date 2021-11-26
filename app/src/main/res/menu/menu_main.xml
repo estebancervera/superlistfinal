@@ -8,4 +8,9 @@
         android:icon="@drawable/ic_master_list_24"
         android:title="@string/master_list_title"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/theme_btn"
+        android:icon="@drawable/ic_themes_24"
+        android:title="Themes"
+        app:showAsAction="always" />
 </menu>

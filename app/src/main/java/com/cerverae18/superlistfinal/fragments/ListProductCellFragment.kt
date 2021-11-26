@@ -1,6 +1,7 @@
 package com.cerverae18.superlistfinal.fragments
 
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.*
 import androidx.fragment.app.Fragment
 import com.cerverae18.superlistfinal.ListActivity
@@ -38,6 +39,9 @@ class ListProductCellFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        val typedValue = TypedValue()
+        context?.theme?.resolveAttribute(R.attr.colorSecondaryVariant,typedValue,true)
         // Inflate the layout for this fragment
         _binding = FragmentListProductCellBinding.inflate(inflater, container, false)
 
@@ -50,7 +54,7 @@ class ListProductCellFragment : Fragment() {
 
         productCheckBox.isChecked = product?.checked ?: false
 
-        val color = if (!productCheckBox.isChecked) resources.getColor(R.color.lightpurple) else resources.getColor(R.color.light_gray)
+        val color = if (!productCheckBox.isChecked) typedValue.data else resources.getColor(R.color.light_gray)
 
         binding.listActivityListCellCardview.setCardBackgroundColor(color)
 

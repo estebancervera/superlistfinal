@@ -1,5 +1,6 @@
 package com.cerverae18.superlistfinal
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -31,6 +32,7 @@ class ListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(EXTRA.getThemeColor(this))
         binding = ActivityListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -46,8 +48,8 @@ class ListActivity : AppCompatActivity() {
         if (listId != null) {
             listViewModel.getListById(listId).observe(this, { list ->
                 val sdf = SimpleDateFormat("dd/MM/yy")
-               // this.supportActionBar?.title = "${sdf.format(list.date)}\n${list.name}"
-                this.supportActionBar?.title = "${list.name}"
+                this.supportActionBar?.subtitle = sdf.format(list.date)
+                this.supportActionBar?.title = list.name
             })
 
             productListViewModel.productsFromList(listId).observe(this, { products ->
@@ -97,6 +99,9 @@ class ListActivity : AppCompatActivity() {
         }
         return super.onCreateOptionsMenu(menu)
     }
+
+
+
 
     private fun updateOnChecked(){
 

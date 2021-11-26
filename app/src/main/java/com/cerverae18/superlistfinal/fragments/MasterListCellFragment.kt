@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -59,8 +60,14 @@ class MasterListCellFragment : Fragment() {
      */
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        //gets color from theme
+        val typedValue = TypedValue()
+        context?.theme?.resolveAttribute(R.attr.colorSecondaryVariant,typedValue,true)
         // Inflate the layout for this fragment
         _binding = FragmentMasterListCellBinding.inflate(inflater, parent, false)
+
+        binding.masterListCardview.setCardBackgroundColor(typedValue.data)
         binding.masterListProductName.text = "${product?.name}"
         binding.masterListProductCategory.text = "${product?.category}"
 

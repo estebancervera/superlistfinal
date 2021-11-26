@@ -15,16 +15,13 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.activity.viewModels
 import com.cerverae18.superlistfinal.fragments.MasterListCellFragment
-import com.cerverae18.superlistfinal.logic.CategoryViewModel
-import com.cerverae18.superlistfinal.logic.CategoryViewModelFactory
-import com.cerverae18.superlistfinal.logic.ProductViewModel
-import com.cerverae18.superlistfinal.logic.ProductViewModelFactory
 import com.cerverae18.superlistfinal.logic.entities.Category
 import com.cerverae18.superlistfinal.logic.entities.Product
 import java.text.SimpleDateFormat
 import java.util.*
 import android.widget.ArrayAdapter
 import com.cerverae18.superlistfinal.fragments.ListProductCellFragment
+import com.cerverae18.superlistfinal.logic.*
 import com.cerverae18.superlistfinal.logic.entities.relations.ProductWithCategory
 
 /**
@@ -67,6 +64,7 @@ class MasterListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(EXTRA.getThemeColor(this))
         binding = ActivityMasterListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -227,6 +225,7 @@ class MasterListActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction().add(R.id.master_list_products_frags, frag).commit()
         }
     }
+
 
     /**
      *  This method changes the order of the fragments representing the products so that
