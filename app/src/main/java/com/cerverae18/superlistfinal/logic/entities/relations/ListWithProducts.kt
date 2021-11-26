@@ -28,11 +28,3 @@ data class ListWithProducts (
     @ColumnInfo(name = "checked") val checked: Boolean,
     ):Serializable
 
-
-//@Embedded val list : List,
-//    @Relation(
-//        parentColumn = "listId",
-//        entityColumn = "productId",
-//        associateBy = Junction(ProductListCrossRef::class)
-//    )
-//    val products: kotlin.collections.List<Product>

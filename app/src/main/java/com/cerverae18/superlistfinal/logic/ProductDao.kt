@@ -23,7 +23,7 @@ interface ProductDao {
 
 
     /**
-     *  This is an abstract method to be implemented in the repository with a query attached to fetch all products from the database
+     *  This is a method to be accessed in the repository with a query attached to fetch all products from the database
      *  @returns a FLOW list of Products
      */
     @Query("SELECT * FROM product")
@@ -31,14 +31,14 @@ interface ProductDao {
 
 
     /**
-     *  This is an abstract method to be implemented in the repository with a query attached to fetch all products with their categories from the database
+     *  This is a method to be accessed in the repository with a query attached to fetch all products with their categories from the database
      *   @returns a FLOW list of ProductWithCategory
      */
     @Query("SELECT product.productId as id , product.name , category.name as category FROM product INNER JOIN category ON category.categoryId = product.category")
     fun getAllWithCategory(): Flow<List<ProductWithCategory>>
 
     /**
-     *  This is an abstract suspend method to be implemented in the repository marked as @insert to insert products into the database
+     *  This is a suspend method to be accessed in the repository marked as @insert to insert products into the database
      *  @param product is a Product to be inserted
      *   @returns Unit
      */
@@ -46,7 +46,7 @@ interface ProductDao {
     suspend fun insert(product: Product)
 
     /**
-     *  This is an abstract suspend method to be implemented in the repository marked as @delete to delete a product from the database
+     *  This is a suspend method to be accessed in the repository marked as @delete to delete a product from the database
      *  @param product is a Product to be deleted
      *   @returns Unit
      */
@@ -54,7 +54,7 @@ interface ProductDao {
    suspend fun delete(product: Product)
 
     /**
-     *  This is an abstract suspend method to be implemented in the repository with a query to delete a product by its ID
+     *  This is a suspend method to be accessed in the repository with a query to delete a product by its ID
      *  @param id is an Int representing the productId from the product to be deleted
      *   @returns Unit
      */

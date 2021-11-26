@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.Flow
 interface ProductListDao {
 
     /**
-     *  This is an abstract method to be implemented in the repository with a query attached to fetch all ProductListCrossRef associated with a List from the database
+     *  This is a method to be called in the repository with a query attached to fetch all ProductListCrossRef associated with a List from the database
      *  @param id is a String representing the listId of the ProductListCrossRef to be fetch
      *  @returns a FLOW list of ListWithProducts
      */
@@ -27,7 +27,7 @@ interface ProductListDao {
     fun getAllFromList(id: String): Flow<List<ListWithProducts>>
 
     /**
-     *  This is an abstract method to be implemented in the repository with a query update a ProductListCrossRef's checked value
+     *  This is a method to be called in the repository with a query update a ProductListCrossRef's checked value
      *   @param id is a String representing the listId of the ProductListCrossRef to be edited
      *   @param checked is a Boolean representing wether a ProductListCrossRef is checked or not
      *  @returns Unit
@@ -36,14 +36,14 @@ interface ProductListDao {
     suspend fun update(id: String,  checked: Boolean)
 
     /**
-     *  This is an abstract suspend method to be implemented in the repository marked as @insert to insert ProductListCrossRef into the database
+     *  This is a suspend method to be called in the repository marked as @insert to insert ProductListCrossRef into the database
      *  @param product is a ProductListCrossRef to be inserted
      *   @returns Unit
      */
     @Insert
     suspend fun insert(product: ProductListCrossRef)
     /**
-     *  This is an abstract suspend method to be implemented in the repository marked as @delete to delete a ProductListCrossRef from the database
+     *  This is a suspend method to be called in the repository marked as @delete to delete a ProductListCrossRef from the database
      *  @param product is a ProductListCrossRef to be deleted
      *   @returns Unit
      */

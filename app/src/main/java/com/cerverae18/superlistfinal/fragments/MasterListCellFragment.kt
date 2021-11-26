@@ -51,7 +51,7 @@ class MasterListCellFragment : Fragment() {
     }
 
     /**
-     *  This method instantiates a fragment.
+     *  This method renders a fragment's view.
      *
      *  @param inflater LayoutInflater object that can be used to inflate any views in the fragment
      *  @param parent parent view that the fragment's UI should be attached to.

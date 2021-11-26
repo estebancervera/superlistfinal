@@ -47,17 +47,6 @@ class MainActivity : AppCompatActivity() {
 
         })
 
-
-
-
-
-        Log.i("EACS", "${supportFragmentManager.fragments.size}")
-
-//        lists.forEach { list ->
-//            val frag = MainActivityListCellFragment.newInstance(list)
-//            supportFragmentManager.beginTransaction().add(R.id.main_activity_lists_frags, frag).commit()
-//
-//        }
         /*
             Intent to New List Activity
          */

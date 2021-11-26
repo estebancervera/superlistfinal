@@ -12,19 +12,50 @@ import com.cerverae18.superlistfinal.logic.entities.ProductListCrossRef
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
+
+/**
+ * An abstract class that extends RoomDatabase
+ *
+ * This is class that extends from RoomDatabase and represents the data that will be saved in the database
+ * including entities.
+ *
+ */
 @Database(entities = [Product::class, List::class, ProductListCrossRef::class, Category::class], version = 8)
 abstract class AppRoomDatabase : RoomDatabase() {
 
+
+    /**
+     * Abstract method that returns a productDao
+     * @return a ProductDao
+     */
     abstract fun productDao(): ProductDao
+    /**
+     * Abstract method that returns a CategoryDao
+     * @return a CategoryDao
+     */
     abstract fun categoryDao(): CategoryDao
+    /**
+     * Abstract method that returns a ListDao
+     * @return a ListDao
+     */
     abstract fun listDao(): ListDao
+    /**
+     * Abstract method that returns a ProductDao
+     * @return a ProductListDao
+     */
     abstract fun productListDao(): ProductListDao
 
-    // Singleton
+    /**
+     * Singleton instance to make sure only one instance of the database is created and accessed throughout the app
+     * @property INSTANCE  represents the an instance of  AppRoomDatabase
+     */
     companion object {
         @Volatile
         private var INSTANCE: AppRoomDatabase? = null
-
+        /**
+         * Getter method for the instance, that if instance is null, will create one.
+         * @return the AppRoomDatabase instance
+         */
         fun getDatabase(context: Context, scope: CoroutineScope): AppRoomDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
@@ -38,10 +69,21 @@ abstract class AppRoomDatabase : RoomDatabase() {
                 instance
             }
         }
-        // ADD Callback in case we need to populate database on creation
 
+
+        /**
+         * Callback for the AppRoomDatabase, this gives access to a callback function to the database
+         *  Here it is used to populate the database upon creation with all the categories
+         *
+         */
         private class AppDatabaseCallback(private val scope: CoroutineScope) : RoomDatabase.Callback() {
 
+
+            /**
+             * Callback to when the Database is created.
+             * Here we call populateDatabase that inserts all the categories to the Database
+             * @param db is a SupportSQLDatabase
+             */
             override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)
                 INSTANCE?.let { database ->
@@ -51,6 +93,12 @@ abstract class AppRoomDatabase : RoomDatabase() {
                 }
             }
 
+            /**
+             * Callback to when the Database needs a migration and destructiveMigration is `true`
+             * Here we also call populateDatabase that inserts all the categories to the Database,
+             * since the actual instance still exists we have to repopulate all the data.
+             * @param db is a SupportSQLDatabase
+             */
             override fun onDestructiveMigration(db: SupportSQLiteDatabase) {
                 super.onDestructiveMigration(db)
                 INSTANCE?.let { database ->
@@ -60,6 +108,10 @@ abstract class AppRoomDatabase : RoomDatabase() {
                 }
             }
 
+            /**
+             * Suspend Method that inserts the default categories to the database but first deletes all the categories from the database
+             * @param categoryDao is the CategoryDao and is used to access the insert method of categories
+             */
             suspend fun populateDatabase(categoryDao: CategoryDao) {
                 categoryDao.deleteAll()
                 categoryDao.insert(Category("Baby"))
