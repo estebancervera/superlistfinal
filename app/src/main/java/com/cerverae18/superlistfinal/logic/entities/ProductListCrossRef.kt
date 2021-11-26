@@ -2,6 +2,8 @@ package com.cerverae18.superlistfinal.logic.entities
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.ForeignKey.CASCADE
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import java.io.Serializable
 import java.util.*
@@ -16,7 +18,12 @@ import java.util.*
  *  @param id String used to represent this correlation
  */
 
-@Entity(primaryKeys = ["productId", "listId"], tableName = "Product_List")
+@Entity(primaryKeys = ["productId", "listId"], tableName = "Product_List", foreignKeys = [ForeignKey(
+    onDelete = CASCADE,
+    entity = List::class,
+    parentColumns = ["listId"],
+    childColumns = ["listId"],
+)] )
 data class ProductListCrossRef(
     val productId: Int,
     val quantity: Int,

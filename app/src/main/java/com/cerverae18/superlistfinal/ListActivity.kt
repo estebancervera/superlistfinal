@@ -2,11 +2,13 @@ package com.cerverae18.superlistfinal
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.widget.Switch
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import com.cerverae18.superlistfinal.databinding.ActivityListBinding
 import com.cerverae18.superlistfinal.fragments.ListProductCellFragment
 import com.cerverae18.superlistfinal.logic.*
@@ -42,6 +44,7 @@ class ListActivity : AppCompatActivity() {
         ListViewModelFactory((application as GeneralApplication).listRepository)
     }
 
+    @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(EXTRA.getThemeColor(this))
@@ -57,9 +60,11 @@ class ListActivity : AppCompatActivity() {
         if (listId != null) {
             // If the id is not null get the selected list asynchronously from the database and observes for changes
             listViewModel.getListById(listId).observe(this, { list ->
-                val sdf = SimpleDateFormat("dd/MM/yy")
-                this.supportActionBar?.subtitle = sdf.format(list.date)
-                this.supportActionBar?.title = list.name
+              if ( list != null)  {
+                  val sdf = SimpleDateFormat("dd/MM/yy")
+                  this.supportActionBar?.subtitle = sdf.format(list.date)
+                  this.supportActionBar?.title = list.name
+              }
             })
 
             // Populate the products list with the database data
@@ -68,6 +73,12 @@ class ListActivity : AppCompatActivity() {
                 // Set the activity's fragments by alphabetical order
                 setFragmentsByAlphabeticalOrder()
             })
+        }
+
+        binding.listActivityBtnDeleteList.setOnClickListener {
+            if (listId != null) {
+                createDeleteDialog(listId)
+            }
         }
 
 
@@ -113,6 +124,25 @@ class ListActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction().remove(fragment).commit()
         }
     }
+
+
+    private fun createDeleteDialog(listId: String){
+        val dialogBuilder = AlertDialog.Builder(this)
+        dialogBuilder
+            .setTitle(getString(R.string.delete_list))
+            .setMessage(getString(R.string.delete_list_message))
+            .setPositiveButton(getString(R.string.yes), DialogInterface.OnClickListener { dialog, _ ->
+                finish()
+                listViewModel.delete(listId)
+                dialog.dismiss()
+            })
+            .setNegativeButton(getString(R.string.cancel), DialogInterface.OnClickListener { dialog, _ ->
+                dialog.dismiss()
+            })
+
+        dialogBuilder.show()
+    }
+
 
 
     /**
